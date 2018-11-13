@@ -112,7 +112,7 @@ public class Cliente {
     }
     
     public boolean verificarExistenciaDeCliente(Cliente a) {
-        List<Cliente> lista = dao.list();
+        List<Cliente> lista = dao.getAll();
         
         for (int i = 0; i < lista.size(); i++) {
             if (a.equals(lista.get(i))) {

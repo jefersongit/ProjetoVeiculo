@@ -40,7 +40,7 @@ public class ClienteDAO implements Dao<Cliente> {
                 + "sexo             varchar2(50),"
                 + "naturalidade     varchar2(50),"
                 + "endereco         varchar2(50),"
-                + "data_nascimento  date"
+                + "data_nascimento  date,"
                 + "primary key(codigo));";
 
         Connection conn = DbConnection.getConnection();
@@ -141,9 +141,6 @@ public class ClienteDAO implements Dao<Cliente> {
             close(conn, stmt, rs);
         }
 
-//        finally {
-//            conexao.fecharConexao();
-//        }
         return clientes;
     }
 
@@ -202,7 +199,7 @@ public class ClienteDAO implements Dao<Cliente> {
             }
 
             if (myConn != null) {
-                myConn.close();
+                //myConn.close();
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao fechar recursos.", e);

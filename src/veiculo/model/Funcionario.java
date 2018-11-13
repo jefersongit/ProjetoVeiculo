@@ -115,7 +115,7 @@ public class Funcionario {
     }
         
     public boolean verificarExistenciaDeFuncionario(Funcionario a) {
-        List<Funcionario> lista = dao.list();
+        List<Funcionario> lista = dao.getAll();
         
         for (int i = 0; i < lista.size(); i++) {
             if (a.equals(lista.get(i))) {
