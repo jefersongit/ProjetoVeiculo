@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import veiculo.dao.Dao;
+import veiculo.dao.DbConnection;
 
 import veiculo.model.Veiculo;
 
