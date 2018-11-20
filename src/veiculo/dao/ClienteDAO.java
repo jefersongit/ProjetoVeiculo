@@ -6,11 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import veiculo.model.Cliente;
 import veiculo.model.Naturalidade;
 import veiculo.model.Sexo;
@@ -72,14 +69,12 @@ public class ClienteDAO implements Dao<Cliente> {
 
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-
-            stmt.setInt(1, cliente.getCodigo());
-            stmt.setString(2, cliente.getNome());
-            stmt.setLong(3, cliente.getCpf());
-            stmt.setString(4, String.valueOf(cliente.getSexo()));
-            stmt.setString(5, String.valueOf(cliente.getNaturalidade()));
-            stmt.setString(6, cliente.getEndereco());
-            stmt.setDate(7, Date.valueOf(cliente.getData_nascimento()));
+            stmt.setString(1, cliente.getNome());
+            stmt.setLong(2, cliente.getCpf());
+            stmt.setString(3, String.valueOf(cliente.getSexo()));
+            stmt.setString(4, String.valueOf(cliente.getNaturalidade()));
+            stmt.setString(5, cliente.getEndereco());
+            stmt.setDate(6, Date.valueOf(cliente.getData_nascimento()));
 
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();

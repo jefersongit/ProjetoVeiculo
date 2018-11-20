@@ -477,16 +477,4 @@ public class JanelaCliente extends javax.swing.JFrame {
         rbFeminino.setSelected(false);
         rbMasculino.setSelected(false);
     }
-
-    public boolean verificarExistenciaDeCliente(Cliente a) {
-        List<Cliente> lista = dao.getAll();
-
-        for (int i = 0; i < lista.size(); i++) {
-            if (a.equals(lista.get(i))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

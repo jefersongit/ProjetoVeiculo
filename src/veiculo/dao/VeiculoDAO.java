@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import veiculo.dao.Dao;
 import veiculo.dao.DbConnection;
+import veiculo.model.Marca;
 
 import veiculo.model.Veiculo;
 
 public class VeiculoDAO implements Dao<Veiculo> {
 
-    private static final String GET_BY_ID = "SELECT * FROM veiculo where codigo = ?";
-    private static final String GET_ALL = "SELECT * FROM veiculo order by codigo asc";
-    private static final String INSERT = "Insert into veiculo(codigo,nome,categoria,cod_marca,modelo,cor,ano) values(?,?,?,?,?,?,?)";
-    private static final String UPDATE = "update veiculo set codigo = ?, nome = ?, categoria = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
+    private static final String GET_BY_ID = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo where veiculo.codigo = ?";
+    private static final String GET_ALL = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo";
+    private static final String INSERT = "Insert into veiculo(codigo,nome,cod_marca,modelo,cor,ano) values(?,?,?,?,?,?)";
+    private static final String UPDATE = "update veiculo set codigo = ?, nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
     private static final String DELETE = "delete from veiculo where codigo = ?";
 
     public VeiculoDAO() {
@@ -25,7 +25,6 @@ public class VeiculoDAO implements Dao<Veiculo> {
             createTable();
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar tabela no banco.", e);
-            // e.printStackTrace();
         }
     }
 
@@ -33,7 +32,6 @@ public class VeiculoDAO implements Dao<Veiculo> {
         String sqlCreate = "create table if not exists veiculo("
                 + "codigo           int,"
                 + "nome             varchar2(50),"
-                + "categoria        varchar2(50),"
                 + "cod_marca        int,"
                 + "modelo           varchar2(50),"
                 + "cor              varchar2(50),"
@@ -45,7 +43,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        close(conn, stmt, null);
+        DbConnection.close(conn, stmt, null);
     }
 
     private Veiculo getVeiculoFromRS(ResultSet rs) throws SQLException {
@@ -53,11 +51,11 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
         veiculo.setCodigo(rs.getInt("codigo"));
         veiculo.setNome(rs.getString("nome"));
-        veiculo.setCategoria(rs.getString("categoria"));
         veiculo.setModelo(rs.getString("modelo"));
         veiculo.setCor(rs.getString("cor"));
         veiculo.setAno(rs.getInt("ano"));
-
+        veiculo.setMarca( new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("ano_criacao")));
+        
         return veiculo;
     }
 
@@ -69,13 +67,10 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-
-            stmt.setInt(1, veiculo.getCodigo());
-            stmt.setString(2, veiculo.getNome());
-            stmt.setString(3, veiculo.getCategoria());
-            stmt.setString(4, veiculo.getModelo());
-            stmt.setString(5, veiculo.getCor());
-            stmt.setInt(6, veiculo.getAno());
+            stmt.setString(1, veiculo.getNome());
+            stmt.setString(2, veiculo.getModelo());
+            stmt.setString(3, veiculo.getCor());
+            stmt.setInt(4, veiculo.getAno());
 
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
@@ -86,7 +81,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao inserir veiculo.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
     }
 
@@ -109,7 +104,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter veiculo pela chave.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         return veiculo;
     }
@@ -134,12 +129,9 @@ public class VeiculoDAO implements Dao<Veiculo> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos os veiculos.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
 
-//        finally {
-//            conexao.fecharConexao();
-//        }
         return veiculos;
     }
 
@@ -157,7 +149,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover veiculo.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 
@@ -170,43 +162,18 @@ public class VeiculoDAO implements Dao<Veiculo> {
             stmt = conn.prepareStatement(UPDATE);
 
             //setar os parâmetros
-            stmt.setInt(1, t.getCodigo());
-            stmt.setString(2, t.getNome());
-            stmt.setString(3, t.getCategoria());
-            stmt.setString(4, t.getModelo());
-            stmt.setString(5, t.getCor());
-            stmt.setInt(6, t.getAno());
-
+            stmt.setString(1, t.getNome());
+            stmt.setString(2, t.getModelo());
+            stmt.setString(3, t.getCor());
+            stmt.setInt(4, t.getAno());
+            stmt.setInt(5, t.getCodigo());
+            
             stmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar veiculo.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
-
-    private static void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-        try {
-            if (myRs != null) {
-                myRs.close();
-            }
-
-            if (myStmt != null) {
-                myStmt.close();
-            }
-
-            if (myConn != null) {
-                myConn.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao fechar recursos.", e);
-        }
-
-    }
-
-    public List<Veiculo> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

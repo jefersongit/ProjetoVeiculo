@@ -177,7 +177,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btFuncionarioActionPerformed
 
     private void btProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProdutoActionPerformed
-        JanelaProduto oi = new JanelaProduto();
+        JanelaVeiculo oi = new JanelaVeiculo();
         oi.setVisible(true);
     }//GEN-LAST:event_btProdutoActionPerformed
 

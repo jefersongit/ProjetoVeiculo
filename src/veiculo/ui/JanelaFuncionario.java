@@ -309,7 +309,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
     private void btDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeletarActionPerformed
         Funcionario a = ad.getValueAT(tabela.getSelectedRow());
         dao.delete(a.getCodigo());
-        JOptionPane.showMessageDialog(null, "Aluno deletado com sucesso");
+        JOptionPane.showMessageDialog(null, "Funcionario deletado com sucesso");
         atualizarTabela();
     }//GEN-LAST:event_btDeletarActionPerformed
 
@@ -365,9 +365,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
     private void atualizarTabela(){
         tabela.setModel(carregarTabela());
     }
-    
-    private Funcionario funcionario;
-    
+        
     private FuncionarioTableModel ad;
          
     private void recuperarFuncionario(Funcionario a) {
@@ -380,18 +378,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         txFuncao.setText(String.valueOf(a.getFuncao()));
         txDataNascimento.setText(String.valueOf(a.getData_nascimento()));
     }
-    
-    private boolean verificarExistenciaDeFuncionario(Funcionario a){
-        List<Funcionario> lista = dao.getAll();
         
-        for (int i = 0; i < lista.size(); i++) {
-            if (a.equals(lista.get(i))) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     private void habilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(true);

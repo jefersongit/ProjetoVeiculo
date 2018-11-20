@@ -5,28 +5,28 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Venda {
-    
+
     private int codigo;
-    private int cod_veiculo;
-    private int cod_funcionario;
-    private int cod_cliente;
+    private Veiculo veiculo;
+    private Funcionario funcionario;
+    private Cliente cliente;
     private float preco;
     private int quantidade;
     private LocalDate data_compra;
 
-    public Venda(int codigo, int cod_veiculo, int cod_funcionario, int cod_cliente, float preco, int quantidade, LocalDate data_compra) {
+    public Venda(int codigo, Veiculo veiculo, Funcionario funcionario, Cliente cliente, float preco, int quantidade, LocalDate data_compra) {
         this.codigo = codigo;
-        this.cod_veiculo = cod_veiculo;
-        this.cod_funcionario  = cod_funcionario;
-        this.cod_cliente  = cod_cliente;
-        this.preco  = preco;
-        this.quantidade  = quantidade;
-        this.data_compra  = data_compra;
+        this.veiculo = veiculo;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.data_compra = data_compra;
     }
 
     public Venda() {
     }
-    
+
     VendaDAO dao = new VendaDAO();
 
     public int getCodigo() {
@@ -37,28 +37,28 @@ public class Venda {
         this.codigo = codigo;
     }
 
-    public int getCod_veiculo() {
-        return cod_veiculo;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setCod_veiculo(int cod_veiculo) {
-        this.cod_veiculo = cod_veiculo;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
-    public int getCod_funcionario() {
-        return cod_funcionario;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setCod_funcionario(int cod_funcionario) {
-        this.cod_funcionario = cod_funcionario;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public int getCod_cliente() {
-        return cod_cliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setCod_cliente(int cod_cliente) {
-        this.cod_cliente = cod_cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public float getPreco() {
@@ -93,8 +93,6 @@ public class Venda {
         this.dao = dao;
     }
 
-
-    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -116,10 +114,10 @@ public class Venda {
         }
         return true;
     }
-    
+
     public boolean verificarExistenciaDeVenda(Venda a) {
-        List<Venda> lista = dao.list();
-        
+        List<Venda> lista = dao.getAll();
+
         for (int i = 0; i < lista.size(); i++) {
             if (a.equals(lista.get(i))) {
                 return true;

@@ -7,23 +7,20 @@ public class Veiculo {
 
     private int codigo;
     private String nome;
-    private String categoria;
-    private int cod_marca;
+    private Marca marca;
     private String modelo;
     private String cor;
     private int ano;
 
-    public Veiculo(int codigo, String nome, String categoria, int cod_marca, String modelo, String cor, int ano) {
+    public Veiculo(int codigo, String nome, Marca marca, String modelo, String cor, int ano) {
         this.codigo = codigo;
         this.nome = nome;
-        this.categoria = categoria;
-        this.cod_marca = cod_marca;
+        this.marca = marca;
         this.modelo = modelo;
         this.cor = cor;
         this.ano = ano;
-
     }
-
+    
     public Veiculo() {
     }
 
@@ -45,22 +42,14 @@ public class Veiculo {
         this.nome = nome;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public Marca getMarca() {
+        return marca;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
-
-    public int getCod_marca() {
-        return cod_marca;
-    }
-
-    public void setCod_marca(int cod_marca) {
-        this.cod_marca = cod_marca;
-    }
-
+    
     public String getModelo() {
         return modelo;
     }
@@ -116,7 +105,7 @@ public class Veiculo {
     }
 
     public boolean verificarExistenciaDeVeiculo(Veiculo a) {
-        List<Veiculo> lista = dao.list();
+        List<Veiculo> lista = dao.getAll();
 
         for (int i = 0; i < lista.size(); i++) {
             if (a.equals(lista.get(i))) {

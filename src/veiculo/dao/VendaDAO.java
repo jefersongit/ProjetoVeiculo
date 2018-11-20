@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import veiculo.dao.Dao;
 import veiculo.dao.DbConnection;
 import veiculo.model.Venda;
 
@@ -47,7 +46,7 @@ public class VendaDAO implements Dao<Venda> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        close(conn, stmt, null);
+        DbConnection.close(conn, stmt, null);
     }
 
     @Override
@@ -58,9 +57,9 @@ public class VendaDAO implements Dao<Venda> {
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, venda.getCodigo());
-            stmt.setInt(2, venda.getCod_veiculo());
-            stmt.setInt(3, venda.getCod_funcionario());
-            stmt.setInt(4, venda.getCod_cliente());
+            stmt.setInt(2, venda.getVeiculo().getCodigo());
+            stmt.setInt(3, venda.getFuncionario().getCodigo());
+            stmt.setInt(4, venda.getCliente().getCodigo());
             stmt.setFloat(5, venda.getPreco());
             stmt.setInt(6, venda.getQuantidade());
             stmt.setDate(7, Date.valueOf(venda.getData_compra()));
@@ -74,7 +73,7 @@ public class VendaDAO implements Dao<Venda> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao inserir venda.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
     }
 
@@ -82,9 +81,9 @@ public class VendaDAO implements Dao<Venda> {
         Venda venda = new Venda();
 
         venda.setCodigo(res.getInt("codigo"));
-        venda.setCod_veiculo(res.getInt("cod_veiculo"));
-        venda.setCod_funcionario(res.getInt("cod_funcionario"));
-        venda.setCod_cliente(res.getInt("cod_cliente"));
+        venda.setVeiculo(res.getInt("cod_veiculo"));
+        venda.setFuncionario(res.getInt("cod_funcionario"));
+        venda.setCliente(res.getInt("cod_cliente"));
         venda.setPreco(res.getFloat("preco"));
         venda.setQuantidade(res.getInt("quantidade"));
         venda.setData_compra(res.getDate("data_compra").toLocalDate());
@@ -111,7 +110,7 @@ public class VendaDAO implements Dao<Venda> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter cliente pela chave.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         return venda;
     }
@@ -136,7 +135,7 @@ public class VendaDAO implements Dao<Venda> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos as vendas.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
 
         return vendas;
@@ -156,7 +155,7 @@ public class VendaDAO implements Dao<Venda> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover venda.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 
@@ -170,9 +169,9 @@ public class VendaDAO implements Dao<Venda> {
 
             //setar os parâmetros
             stmt.setInt(1, t.getCodigo());
-            stmt.setInt(2, t.getCod_veiculo());
-            stmt.setInt(3, t.getCod_funcionario());
-            stmt.setInt(4, t.getCod_cliente());
+            stmt.setInt(2, t.getVeiculo().getCodigo());
+            stmt.setInt(3, t.getFuncionario().getCodigo());
+            stmt.setInt(4, t.getCliente().getCodigo());
             stmt.setFloat(5, t.getPreco());
             stmt.setInt(6, t.getQuantidade());
             stmt.setDate(7, Date.valueOf(t.getData_compra()));
@@ -182,33 +181,9 @@ public class VendaDAO implements Dao<Venda> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar venda.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
 
         }
     }
-
-    private static void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-        try {
-            if (myRs != null) {
-                myRs.close();
-            }
-
-            if (myStmt != null) {
-                myStmt.close();
-            }
-
-            if (myConn != null) {
-                myConn.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao fechar recursos.", e);
-        }
-
-    }
-
-    public List<Venda> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
 
