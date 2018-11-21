@@ -13,6 +13,7 @@ import veiculo.model.Modelo;
 import veiculo.model.Cor;
 import veiculo.model.Veiculo;
 import resources.VeiculoTableModel;
+import veiculo.model.Marca;
 
 /**
  *
@@ -170,7 +171,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabela);
 
-        cbModelo.setModel(new javax.swing.DefaultComboBoxModel(veiculo.model.Modelo.values()));
+        cbModelo.setModel(new javax.swing.DefaultComboBoxModel(Modelo.values()));
         cbModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbModeloActionPerformed(evt);
@@ -423,20 +424,14 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         int codigo = Integer.parseInt(txCodigo.getText());
         String nome = txNome.getText();
         int ano = Integer.parseInt(txAno.getText());
-        String marca = txMarca.getText();
+        Marca marca = new Marca();
+        
+        //marca.setCodigo(codigo);
+        //marca.setNome(nome);
         Cor cor = (Cor) cbCor.getSelectedItem();
         Modelo modelo = (Modelo) cbModelo.getSelectedItem();
         
-        return new Veiculo(codigo, nome, modelo, cor, ano, marca);
-        
-//        this.codigo = codigo;
-//        this.nome = nome;
-//        this.marca = marca;
-//        this.modelo = modelo;
-//        this.cor = cor;
-//        this.ano = ano;
-        
-        
+        return new Veiculo(codigo, nome, marca, modelo, cor, ano);
     }
     
     private void desabilitarComponentes() {

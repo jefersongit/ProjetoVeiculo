@@ -5,73 +5,113 @@
  */
 package resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import veiculo.model.Veiculo;
 
-/**
- *
- * @author jeferson.guesser
- */
-public class VeiculoTableModel extends GenericTableModel<Veiculo>{
+public class VeiculoTableModel extends GenericTableModel<Veiculo> {
 
-    @Override
-    public void setData(List<Veiculo> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private final String[] colunas = {"Codigo", "Nome", "Modelo",
+        "Cor", "Ano", "Marca"};
+
+    private List<Veiculo> list;
+
+    private VeiculoTableModel() {
+        list = new ArrayList<>();
     }
 
-    @Override
-    public Veiculo getValueAT(int row) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int indexOf(Veiculo entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void remove(Veiculo entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public VeiculoTableModel(List<Veiculo> list) {
+        this();
+        setData(list);
     }
 
     @Override
     public void add(Veiculo entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        list.add(0, entity);
+        super.fireTableDataChanged();
+    }
+
+    @Override
+    public void clear() {
+        this.list.clear();
+        super.fireTableDataChanged();
     }
 
     @Override
     public boolean contains(Veiculo entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list.contains(entity);
+    }
+
+    @Override
+    public Veiculo getValueAT(int row) {
+        return list.get(row);
+    }
+
+    @Override
+    public int indexOf(Veiculo entity) {
+        return list.indexOf(entity);
     }
 
     @Override
     public List<Veiculo> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list;
+    }
+
+    @Override
+    public void remove(Veiculo entity) {
+        list.remove(entity);
+        super.fireTableDataChanged();
+    }
+
+    @Override
+    public void setData(List<Veiculo> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        super.fireTableDataChanged();
     }
 
     @Override
     public void updateItem(int idx, Veiculo entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        list.set(idx, entity);
+        super.fireTableDataChanged();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return colunas.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getRowCount() {
+        return list.size();
     }
-    
+
+    @Override
+    public Object getValueAt(int linha, int coluna) {
+        Veiculo veiculo = list.get(linha);
+        switch (coluna) {
+            case 0:
+                return veiculo.getCodigo();
+            case 1:
+                return veiculo.getNome();
+            case 2:
+                return veiculo.getModelo();
+            case 3:
+                return veiculo.getCor();
+            case 4:
+                return veiculo.getAno();
+            case 5:
+                return veiculo.getMarca();
+        }
+        return null;
+    }
+
+    @Override
+    public String getColumnName(int col) {
+        return colunas[col];
+    }
+
+    public String[] getColumnNames() {
+        return colunas;
+    }
 }

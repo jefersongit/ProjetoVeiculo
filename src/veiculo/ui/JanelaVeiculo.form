@@ -331,7 +331,7 @@
         <Component class="javax.swing.JComboBox" name="cbModelo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(veiculo.model.Modelo.values())" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(Modelo.values())" type="code"/>
             </Property>
           </Properties>
           <Events>

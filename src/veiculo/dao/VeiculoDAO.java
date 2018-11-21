@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import veiculo.dao.DbConnection;
+import veiculo.model.Cor;
 import veiculo.model.Marca;
+import veiculo.model.Modelo;
 
 import veiculo.model.Veiculo;
 
@@ -51,8 +53,8 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
         veiculo.setCodigo(rs.getInt("codigo"));
         veiculo.setNome(rs.getString("nome"));
-        veiculo.setModelo(rs.getString("modelo"));
-        veiculo.setCor(rs.getString("cor"));
+        veiculo.setModelo(Modelo.valueOf(rs.getString("modelo")));
+        veiculo.setCor(Cor.valueOf(rs.getString("cor")));
         veiculo.setAno(rs.getInt("ano"));
         veiculo.setMarca( new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("ano_criacao")));
         
@@ -68,8 +70,8 @@ public class VeiculoDAO implements Dao<Veiculo> {
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, veiculo.getNome());
-            stmt.setString(2, veiculo.getModelo());
-            stmt.setString(3, veiculo.getCor());
+            stmt.setString(2, String.valueOf(veiculo.getModelo()));
+            stmt.setString(3, String.valueOf(veiculo.getCor()));
             stmt.setInt(4, veiculo.getAno());
 
             stmt.executeUpdate();
@@ -163,8 +165,8 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
             //setar os parâmetros
             stmt.setString(1, t.getNome());
-            stmt.setString(2, t.getModelo());
-            stmt.setString(3, t.getCor());
+            stmt.setString(2, String.valueOf(t.getModelo()));
+            stmt.setString(3, String.valueOf(t.getCor()));
             stmt.setInt(4, t.getAno());
             stmt.setInt(5, t.getCodigo());
             

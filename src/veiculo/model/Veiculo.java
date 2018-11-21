@@ -8,11 +8,11 @@ public class Veiculo {
     private int codigo;
     private String nome;
     private Marca marca;
-    private String modelo;
-    private String cor;
+    private Modelo modelo;
+    private Cor cor;
     private int ano;
 
-    public Veiculo(int codigo, String nome, Marca marca, String modelo, String cor, int ano) {
+    public Veiculo(int codigo, String nome, Marca marca, Modelo modelo, Cor cor, int ano) {
         this.codigo = codigo;
         this.nome = nome;
         this.marca = marca;
@@ -50,19 +50,19 @@ public class Veiculo {
         this.marca = marca;
     }
     
-    public String getModelo() {
+    public Modelo getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
 
-    public String getCor() {
+    public Cor getCor() {
         return cor;
     }
 
-    public void setCor(String cor) {
+    public void setCor(Cor cor) {
         this.cor = cor;
     }
 
