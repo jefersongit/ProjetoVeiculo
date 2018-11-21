@@ -81,9 +81,9 @@ public class VendaDAO implements Dao<Venda> {
         Venda venda = new Venda();
 
         venda.setCodigo(res.getInt("codigo"));
-        venda.setVeiculo(res.getInt("cod_veiculo"));
-        venda.setFuncionario(res.getInt("cod_funcionario"));
-        venda.setCliente(res.getInt("cod_cliente"));
+//        venda.setVeiculo(res.getInt("cod_veiculo"));
+//        venda.setFuncionario(res.getInt("cod_funcionario"));
+//        venda.setCliente(res.getInt("cod_cliente"));
         venda.setPreco(res.getFloat("preco"));
         venda.setQuantidade(res.getInt("quantidade"));
         venda.setData_compra(res.getDate("data_compra").toLocalDate());
