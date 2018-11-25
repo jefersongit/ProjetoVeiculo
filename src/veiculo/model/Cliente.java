@@ -27,8 +27,6 @@ public class Cliente {
     public Cliente() {
     }
     
-    ClienteDAO dao = new ClienteDAO();
-
     public int getCodigo() {
         return codigo;
     }
@@ -112,6 +110,7 @@ public class Cliente {
     }
     
     public boolean verificarExistenciaDeCliente(Cliente a) {
+        ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = dao.getAll();
         
         for (int i = 0; i < lista.size(); i++) {

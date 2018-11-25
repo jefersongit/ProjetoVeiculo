@@ -45,7 +45,7 @@ public class ClienteDAO implements Dao<Cliente> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        close(conn, stmt, null);
+        DbConnection.close(conn, stmt, null);
     }
 
     private Cliente getClienteFromRS(ResultSet rs) throws SQLException {
@@ -108,7 +108,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter cliente pela chave.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         return cliente;
     }
@@ -133,7 +133,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos os clientes.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
 
         return clientes;
@@ -153,7 +153,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover cliente.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 
@@ -179,7 +179,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar cliente.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 

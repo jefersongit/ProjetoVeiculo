@@ -60,7 +60,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         cbModelo = new javax.swing.JComboBox<>();
-        cbCor = new javax.swing.JComboBox<String>();
+        cbCor = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txPreco = new javax.swing.JTextField();
@@ -72,7 +72,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         btNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/novo.png"))); // NOI18N
+        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/novo.png"))); // NOI18N
         btNovo.setText("Novo");
         btNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +82,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jPanel1.add(btNovo);
 
         btCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/cancelar.png"))); // NOI18N
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
         btCancelar.setEnabled(false);
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         btSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/Salvar.png"))); // NOI18N
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Salvar.png"))); // NOI18N
         btSalvar.setText("Salvar");
         btSalvar.setEnabled(false);
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jPanel2.add(btSalvar);
 
         btDeletar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/Excluir2.png"))); // NOI18N
+        btDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Excluir2.png"))); // NOI18N
         btDeletar.setText("Deletar");
         btDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +118,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jPanel2.add(btDeletar);
 
         btVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/Voltar.png"))); // NOI18N
+        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Voltar.png"))); // NOI18N
         btVoltar.setText("Voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,7 +246,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,7 +279,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);

@@ -319,31 +319,17 @@ public class JanelaMarca extends javax.swing.JFrame {
     }
 
     private void recuperaMarca(Marca a) {
-        //a = dao.getById(a.getCodigo());  
+        a = dao.getByKey(a.getCodigo());  
         habilitarComponentes();
         txCodigo.setText(String.valueOf(a.getCodigo()));
         txNome.setText(a.getNome());
-        txEndereco.setText(a.getEndereco());
-        txCpf.setText(String.valueOf(a.getCpf()));
-        if (a.getSexo().equals(Sexo.MASCULINO)) {
-            rbMasculino.setSelected(true);
-        } else if (a.getSexo().equals(Sexo.FEMININO)) {
-            rbFeminino.setSelected(true);
-        }
-        cbNaturalidade.setSelectedItem(a.getNaturalidade());
-        txDataNascimento.setText(String.valueOf(a.getData_nascimento()));
+        txDataNascimento.setText(String.valueOf(a.getAno_criacao()));
     }
 
     private void habilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(true);
         txNome.setEnabled(true);
-        txEndereco.setEnabled(true);
-        cbNaturalidade.setEnabled(true);
-        cbNaturalidade.setSelectedIndex(-1);
-        rbFeminino.setEnabled(true);
-        rbMasculino.setEnabled(true);
-        txCpf.setEnabled(true);
         txDataNascimento.setEnabled(true);
         btCancelar.setEnabled(true);
         btSalvar.setEnabled(true);
@@ -353,27 +339,16 @@ public class JanelaMarca extends javax.swing.JFrame {
     private Marca getMarca() {
         int codigo = Integer.parseInt(txCodigo.getText());
         String nome = txNome.getText();
-        String endereco = txEndereco.getText();
-        Sexo sexo = null;
-        sexo = rbFeminino.isSelected() ? sexo.FEMININO : sexo.MASCULINO;
-        Naturalidade naturalidade = (Naturalidade) cbNaturalidade.getSelectedItem();
-        int cpf = Integer.parseInt(txCpf.getText());
-        LocalDate dt_nascimento = LocalDate.parse(txDataNascimento.getText());
+        LocalDate anoCriacao = LocalDate.parse(txDataNascimento.getText());
 
-        return new Marca(codigo, nome, cpf, sexo, naturalidade, endereco, dt_nascimento);
+        return new Marca(codigo, nome, anoCriacao);
     }
 
     private void desabilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(false);
         txNome.setEnabled(false);
-        txEndereco.setEnabled(false);
-        cbNaturalidade.setEnabled(false);
-        cbNaturalidade.setSelectedIndex(-1);
-        rbFeminino.setEnabled(false);
-        rbMasculino.setEnabled(false);
         txDataNascimento.setEnabled(false);
-        txCpf.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
     }
@@ -381,12 +356,7 @@ public class JanelaMarca extends javax.swing.JFrame {
     private void limparCampos() {
         txCodigo.setText("");
         txNome.setText("");
-        txEndereco.setText("");
-        cbNaturalidade.removeAll();
         btgSexo.clearSelection();
-        txCpf.setText("");
         txDataNascimento.setText("");
-        rbFeminino.setSelected(false);
-        rbMasculino.setSelected(false);
     }
 }

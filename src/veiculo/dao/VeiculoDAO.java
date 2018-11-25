@@ -37,7 +37,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
                 + "cod_marca        int,"
                 + "modelo           varchar2(50),"
                 + "cor              varchar2(50),"
-                + "ano              int"
+                + "ano              int,"
                 + "foreign key(cod_marca) references marca(codigo))";
 
         Connection conn = DbConnection.getConnection();
@@ -56,7 +56,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
         veiculo.setModelo(Modelo.valueOf(rs.getString("modelo")));
         veiculo.setCor(Cor.valueOf(rs.getString("cor")));
         veiculo.setAno(rs.getInt("ano"));
-        veiculo.setMarca( new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("ano_criacao")));
+        veiculo.setMarca( new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getDate("ano_criacao").toLocalDate()));
         
         return veiculo;
     }

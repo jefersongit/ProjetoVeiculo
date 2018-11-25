@@ -39,7 +39,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
                 + "salario          float,"
                 + "matricula        varchar2(50),"
                 + "funcao           varchar2(50),"
-                + "data_nascimento  date"
+                + "data_nascimento  date,"
                 + "primary key(codigo));";
 
         Connection conn = DbConnection.getConnection();
@@ -47,7 +47,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        close(conn, stmt, null);
+        DbConnection.close(conn, stmt, null);
     }
 
     @Override
@@ -57,14 +57,13 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         ResultSet rs = null;
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, funcionario.getCodigo());
-            stmt.setString(2, funcionario.getNome());
-            stmt.setLong(3, funcionario.getCpf());
-            stmt.setDouble(4, funcionario.getSalario());
-            stmt.setLong(5, funcionario.getMatricula());
-            stmt.setString(6, funcionario.getFuncao());
-            stmt.setDate(7, Date.valueOf(funcionario.getData_nascimento()));
-            stmt.execute();
+            stmt.setString(1, funcionario.getNome());
+            stmt.setLong(2, funcionario.getCpf());
+            stmt.setDouble(3, funcionario.getSalario());
+            stmt.setLong(4, funcionario.getMatricula());
+            stmt.setString(5, funcionario.getFuncao());
+            stmt.setDate(6, Date.valueOf(funcionario.getData_nascimento()));
+            
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
 
@@ -74,7 +73,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao inserir funcionario.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
     }
 
@@ -111,7 +110,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter cliente pela chave.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         return funcionario;
     }
@@ -136,7 +135,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos os funcionarios.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
 
         return funcionarios;
@@ -156,7 +155,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover funcionario.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 
@@ -182,28 +181,8 @@ public class FuncionarioDAO implements Dao<Funcionario> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar funcionario.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
 
         }
     }
-
-    private static void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-        try {
-            if (myRs != null) {
-                myRs.close();
-            }
-
-            if (myStmt != null) {
-                myStmt.close();
-            }
-
-            if (myConn != null) {
-                myConn.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao fechar recursos.", e);
-        }
-
-    }
-
 }

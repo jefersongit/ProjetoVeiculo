@@ -31,7 +31,6 @@ public class MarcaDAO implements Dao<Marca> {
             createTable();
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar tabela no banco.", e);
-            // e.printStackTrace();
         }
     }
     
@@ -40,8 +39,7 @@ public class MarcaDAO implements Dao<Marca> {
 
         marca.setCodigo(rs.getInt("codigo"));
         marca.setNome(rs.getString("nome"));
-        marca.setAno_criacao(rs.getInt("ano_criacao"));
-
+        marca.setAno_criacao(rs.getDate("ano_criacao").toLocalDate());
         return marca;
     }
     
@@ -49,7 +47,7 @@ public class MarcaDAO implements Dao<Marca> {
         String sqlCreate = "create table if not exists marca("
                 + "codigo           int,"
                 + "nome             varchar2(50),"
-                + "ano_criacao      int"
+                + "ano_criacao      date,"
                 + "primary key(codigo));";
 
         Connection conn = DbConnection.getConnection();
@@ -57,7 +55,7 @@ public class MarcaDAO implements Dao<Marca> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        close(conn, stmt, null);
+        DbConnection.close(conn, stmt, null);
     }
     
     @Override
@@ -79,7 +77,7 @@ public class MarcaDAO implements Dao<Marca> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter marca pela chave.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         return marca;
     }
@@ -104,24 +102,33 @@ public class MarcaDAO implements Dao<Marca> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos os marcas.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
         
         return marcas;
     }
 
     @Override
-    public void insert(Marca t) {
+        public void insert(Marca marca) {
         Connection conn = DbConnection.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, marca.getNome());
+            stmt.setDate(2, Date.valueOf(marca.getAno_criacao()));
+
+            stmt.executeUpdate();
+            rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                marca.setCodigo(rs.getInt(1));
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao inserir marca.", e);
         } finally {
-            close(conn, stmt, rs);
+            DbConnection.close(conn, stmt, rs);
         }
     }
 
@@ -132,14 +139,14 @@ public class MarcaDAO implements Dao<Marca> {
 
         try {
             stmt = conn.prepareStatement(DELETE);
-
             stmt.setInt(1, id);
-
+            //?
+            
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover marca.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
 
@@ -151,9 +158,8 @@ public class MarcaDAO implements Dao<Marca> {
         try {
             stmt = conn.prepareStatement(UPDATE);
 
-            //setar os parâmetros
             stmt.setString(1, t.getNome());
-            stmt.setInt(2, t.getAno_criacao());
+            stmt.setDate(2, Date.valueOf(t.getAno_criacao()));
             stmt.setInt(3, t.getCodigo());
 
             stmt.executeUpdate();
@@ -161,27 +167,8 @@ public class MarcaDAO implements Dao<Marca> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar cliente.", e);
         } finally {
-            close(conn, stmt, null);
+            DbConnection.close(conn, stmt, null);
         }
     }
-    
-    private static void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-        try {
-            if (myRs != null) {
-                myRs.close();
-            }
-
-            if (myStmt != null) {
-                myStmt.close();
-            }
-
-            if (myConn != null) {
-                myConn.close();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao fechar recursos.", e);
-        }
-
-    }
-    
+        
 }

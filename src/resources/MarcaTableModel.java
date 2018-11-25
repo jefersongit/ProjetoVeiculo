@@ -1,27 +1,26 @@
 package resources;
 
+import veiculo.model.Marca;
 import java.util.ArrayList;
 import java.util.List;
-import veiculo.model.Produto;
 
-public class ProdutoTableModel extends GenericTableModel<Produto> {
+public class MarcaTableModel extends GenericTableModel<Marca> {
 
-    private final String[] colunas = {"Codigo", "Nome", "Modelo", 
-        "Cor", "Ano", "Marca", "Preco"};
+    private final String[] colunas = {"Codigo", "Nome", "Ano de Criação"};
     
-    private List<Produto> list;
+    private List<Marca> list;
 
-    private ProdutoTableModel() {
+    private MarcaTableModel() {
         list = new ArrayList<>();
     }
 
-    public ProdutoTableModel(List<Produto> list) {
+    public MarcaTableModel(List<Marca> list) {
         this();
         setData(list);
     }
 
     @Override
-    public void add(Produto entity) {
+    public void add(Marca entity) {
         list.add(0, entity);
         super.fireTableDataChanged();
     }
@@ -33,40 +32,40 @@ public class ProdutoTableModel extends GenericTableModel<Produto> {
     }
 
     @Override
-    public boolean contains(Produto entity) {
+    public boolean contains(Marca entity) {
         return list.contains(entity);
     }
 
     @Override
-    public Produto getValueAT(int row) {
+    public Marca getValueAT(int row) {
         return list.get(row);
     }
 
     @Override
-    public int indexOf(Produto entity) {
+    public int indexOf(Marca entity) {
         return list.indexOf(entity);
     }
 
     @Override
-    public List<Produto> list() {
+    public List<Marca> list() {
         return list;
     }
 
     @Override
-    public void remove(Produto entity) {
+    public void remove(Marca entity) {
         list.remove(entity);
         super.fireTableDataChanged();
     }
 
     @Override
-    public void setData(List<Produto> list) {
+    public void setData(List<Marca> list) {
         this.list.clear();
         this.list.addAll(list);
         super.fireTableDataChanged();
     }
 
     @Override
-    public void updateItem(int idx, Produto entity) {
+    public void updateItem(int idx, Marca entity) {
         list.set(idx, entity);
         super.fireTableDataChanged();
     }
@@ -83,22 +82,14 @@ public class ProdutoTableModel extends GenericTableModel<Produto> {
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Produto produto = list.get(linha);
+        Marca marca = list.get(linha);
         switch (coluna) {
             case 0:
-                return produto.getCodigo();
+                return marca.getCodigo();
             case 1:
-                return produto.getNome();
+                return marca.getNome();
             case 2:
-                return produto.getModelo();
-            case 3:
-                return produto.getCor();
-            case 4:
-                return produto.getAno();
-            case 5:
-                return produto.getMarca(); 
-            case 6:
-                return produto.getPreco();
+                return marca.getAno_criacao();
         }
         return null;
     }

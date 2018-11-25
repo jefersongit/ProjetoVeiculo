@@ -5,16 +5,21 @@
  */
 package veiculo.model;
 
+import java.time.LocalDate;
+import java.util.List;
+import veiculo.dao.MarcaDAO;
+
 /**
  *
  * @author gabriel.zanghelini
  */
 public class Marca {
+
     private int codigo;
     private String nome;
-    private int ano_criacao;
+    private LocalDate ano_criacao;
 
-    public Marca(int codigo, String nome, int ano_criacao) {
+    public Marca(int codigo, String nome, LocalDate ano_criacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.ano_criacao = ano_criacao;
@@ -39,11 +44,24 @@ public class Marca {
         this.nome = nome;
     }
 
-    public int getAno_criacao() {
+    public LocalDate getAno_criacao() {
         return ano_criacao;
     }
 
-    public void setAno_criacao(int ano_criacao) {
+    public void setAno_criacao(LocalDate ano_criacao) {
         this.ano_criacao = ano_criacao;
     }
+
+    public boolean verificarExistenciaDeMarca(Marca a) {
+        MarcaDAO dao = new MarcaDAO();
+        List<Marca> lista = dao.getAll();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (a.equals(lista.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -2,7 +2,6 @@ package veiculo.ui;
 
 import veiculo.dao.ClienteDAO;
 import veiculo.dao.FuncionarioDAO;
-import veiculo.dao.ProdutoDAO;
 import veiculo.dao.VendaDAO;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,9 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import veiculo.model.Cliente;
 import veiculo.model.Funcionario;
-import veiculo.model.Produto;
 import veiculo.model.Venda;
-import resources.ProdutoTableModel;
 import resources.VendaTableModel;
 
 public class JanelaVenda extends javax.swing.JFrame {
@@ -52,13 +49,13 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
         txCodigo = new javax.swing.JTextField();
-        cbFuncionario = new javax.swing.JComboBox<String>();
+        cbFuncionario = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txQuantidade = new javax.swing.JTextField();
         txData = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        cbCliente = new javax.swing.JComboBox<String>();
+        cbCliente = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txTotal = new javax.swing.JTextField();
@@ -68,7 +65,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         btNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/novo.png"))); // NOI18N
+        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/novo.png"))); // NOI18N
         btNovo.setText("Novo");
         btNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +75,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         jPanel1.add(btNovo);
 
         btCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/cancelar.png"))); // NOI18N
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
         btCancelar.setEnabled(false);
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +90,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         btSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/Salvar.png"))); // NOI18N
+        btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Salvar.png"))); // NOI18N
         btSalvar.setText("Salvar");
         btSalvar.setEnabled(false);
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +101,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         jPanel2.add(btSalvar);
 
         btSair.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/veiculo/ui/Imagens/Voltar.png"))); // NOI18N
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Imagens/Voltar.png"))); // NOI18N
         btSair.setText("Voltar");
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +112,7 @@ public class JanelaVenda extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", 0, 0, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         tabelaProduto.setModel(carregarTabelaProduto());
         tabelaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,6 +121,8 @@ public class JanelaVenda extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaProduto);
+
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -141,12 +140,13 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", 0, 0, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         tabelaVenda.setModel(carregarTabelaVenda());
         jScrollPane2.setViewportView(tabelaVenda);
+
+        jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -164,9 +164,8 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nova Venda", 0, 0, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nova Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jLabel2.setText("Funcionário:");
 
@@ -193,6 +192,19 @@ public class JanelaVenda extends javax.swing.JFrame {
 
         txTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txTotal.setEnabled(false);
+
+        jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(cbFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txQuantidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txData, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(cbCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -251,18 +263,6 @@ public class JanelaVenda extends javax.swing.JFrame {
                     .addComponent(txTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
-        jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(cbFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txQuantidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txData, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(cbCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -329,14 +329,14 @@ public class JanelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void txQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txQuantidadeFocusLost
-        double preco = 0;
-
-        Produto produto = ptm.getValueAT(tabelaProduto.getSelectedRow());
-        preco = produto.getPreco();
-
-        int quantidade = Integer.parseInt(txQuantidade.getText());
-        double valorFinal = preco * quantidade;
-        txTotal.setText(String.valueOf(valorFinal));
+//        double preco = 0;
+//
+//        Produto produto = ptm.getValueAT(tabelaProduto.getSelectedRow());
+//        preco = produto.getPreco();
+//
+//        int quantidade = Integer.parseInt(txQuantidade.getText());
+//        double valorFinal = preco * quantidade;
+//        txTotal.setText(String.valueOf(valorFinal));
 
     }//GEN-LAST:event_txQuantidadeFocusLost
 
@@ -372,10 +372,10 @@ public class JanelaVenda extends javax.swing.JFrame {
     VendaDAO daoVenda = new VendaDAO();
     ClienteDAO daoCliente = new ClienteDAO();
     FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-    ProdutoDAO daoProduto = new ProdutoDAO();
-
-    private ProdutoTableModel ptm;
-    private VendaTableModel vtm;
+//    ProdutoDAO daoProduto = new ProdutoDAO();
+//
+//    private ProdutoTableModel ptm;
+//    private VendaTableModel vtm;
 
     private TableModel carregarTabelaVenda() {
 //        List<Venda> listaVenda = daoVenda.list();
@@ -435,12 +435,12 @@ public class JanelaVenda extends javax.swing.JFrame {
         ClienteDAO clienteDao = new ClienteDAO();
         FuncionarioDAO funcionarioDao = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
-        Produto produto = new Produto();
+//        Produto produto = new Produto();
         Cliente cliente = new Cliente();
 
-        int cod_produto;
-        Produto p = ptm.getValueAT(tabelaProduto.getSelectedRow());
-        cod_produto = p.getCodigo();
+//        int cod_produto;
+//        Produto p = ptm.getValueAT(tabelaProduto.getSelectedRow());
+//        cod_produto = p.getCodigo();
 
         List<Cliente> listaCliente = clienteDao.getAll();
         List<Funcionario> listaFuncionario = funcionarioDao.getAll();
@@ -462,11 +462,12 @@ public class JanelaVenda extends javax.swing.JFrame {
         //Produto produto = ad.getValueAT(tabelaProduto.getSelectedRow());
         int quantidade = Integer.parseInt(txQuantidade.getText());
         int codigo = Integer.parseInt(txCodigo.getText());
-        produto.setCodigo(cod_produto);
+//        produto.setCodigo(cod_produto);
         double total = Double.parseDouble(txTotal.getText());
         LocalDate data_compra = LocalDate.parse(txData.getText());
 
-        return new Venda(codigo, produto, funcionario, cliente, total, quantidade, data_compra);
+//        return new Venda(codigo, produto, funcionario, cliente, total, quantidade, data_compra);
+return null;
     }
 
     private void CarregaCliente() {
