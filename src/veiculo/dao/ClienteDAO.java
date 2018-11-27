@@ -31,7 +31,7 @@ public class ClienteDAO implements Dao<Cliente> {
 
     private void createTable() throws SQLException {
         String sqlCreate = "create table if not exists cliente("
-                + "codigo           int,"
+                + "codigo           integer,"
                 + "nome             varchar2(50),"
                 + "cpf              long,"
                 + "sexo             varchar2(50),"

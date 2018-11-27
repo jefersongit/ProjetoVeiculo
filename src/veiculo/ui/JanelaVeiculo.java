@@ -6,6 +6,7 @@
 package veiculo.ui;
 
 import veiculo.dao.VeiculoDAO;
+import veiculo.dao.MarcaDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
@@ -52,15 +53,13 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txCodigo = new javax.swing.JTextField();
         txNome = new javax.swing.JTextField();
         txAno = new javax.swing.JTextField();
-        txMarca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         cbModelo = new javax.swing.JComboBox<>();
-        cbCor = new javax.swing.JComboBox<>();
+        cbCor = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txPreco = new javax.swing.JTextField();
@@ -141,17 +140,9 @@ public class JanelaVeiculo extends javax.swing.JFrame {
 
         jLabel6.setText("Ano:");
 
-        jLabel7.setText("Marca:");
-
         txNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txNomeActionPerformed(evt);
-            }
-        });
-
-        txMarca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txMarcaActionPerformed(evt);
             }
         });
 
@@ -203,12 +194,9 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbCor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txAno, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +234,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,14 +260,10 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                             .addComponent(txCodMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(41, 41, 41)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -290,10 +274,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     private void txNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txNomeActionPerformed
-
-    private void txMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txMarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txMarcaActionPerformed
 
     private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
         // TODO add your handling code here:
@@ -360,7 +340,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -371,7 +350,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     private javax.swing.JTextField txAno;
     private javax.swing.JTextField txCodMarca;
     private javax.swing.JTextField txCodigo;
-    private javax.swing.JTextField txMarca;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txPreco;
     // End of variables declaration//GEN-END:variables
@@ -398,7 +376,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         txCodigo.setText(String.valueOf(a.getCodigo()));
         txNome.setText(String.valueOf(a.getNome()));
         txAno.setText(String.valueOf(a.getAno()));
-        txMarca.setText(String.valueOf(a.getMarca()));
         cbModelo.setSelectedItem(a.getModelo());
         cbCor.setSelectedItem(a.getCor());
     }
@@ -407,7 +384,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         limparCampos();
         txCodigo.setEnabled(true);
         txNome.setEnabled(true);
-        txMarca.setEnabled(true);
         txAno.setEnabled(true);
         txPreco.setEnabled(true);
         txCodMarca.setEnabled(true);
@@ -421,13 +397,16 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     } 
     
     private Veiculo getVeiculo() {
-        int codigo = Integer.parseInt(txCodigo.getText());
+        Integer codigo = 99999;
+        if (!txCodigo.equals("")){
+            codigo = Integer.parseInt(txCodigo.toString());
+        }
         String nome = txNome.getText();
         int ano = Integer.parseInt(txAno.getText());
-        Marca marca = new Marca();
         
-        //marca.setCodigo(codigo);
-        //marca.setNome(nome);
+        MarcaDAO mDao = new MarcaDAO();
+        Marca marca = mDao.getByKey(Integer.parseInt(txCodMarca.getText()));        
+        
         Cor cor = (Cor) cbCor.getSelectedItem();
         Modelo modelo = (Modelo) cbModelo.getSelectedItem();
         
@@ -438,7 +417,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         limparCampos();
         txCodigo.setEnabled(false);
         txNome.setEnabled(false);
-        txMarca.setEnabled(false);
         txAno.setEnabled(false);
         txPreco.setEnabled(false);
         txCodMarca.setEnabled(false);
@@ -457,7 +435,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         txAno.setText("");
         cbCor.removeAll();
         cbModelo.removeAll();
-        txMarca.setText("");
         txPreco.setText("");
         txCodMarca.setText("");
         }

@@ -45,9 +45,9 @@ public class MarcaDAO implements Dao<Marca> {
     
     private void createTable() throws SQLException {
         String sqlCreate = "create table if not exists marca("
-                + "codigo           int,"
-                + "nome             varchar2(50),"
-                + "ano_criacao      date,"
+                + "codigo           INTEGER,"
+                + "nome             VARCHAR2(50),"
+                + "ano_criacao      DATE,"
                 + "primary key(codigo));";
 
         Connection conn = DbConnection.getConnection();

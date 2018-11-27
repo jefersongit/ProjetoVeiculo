@@ -32,12 +32,12 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
     private void createTable() throws SQLException {
         String sqlCreate = "create table if not exists veiculo("
-                + "codigo           int,"
+                + "codigo           integer,"
                 + "nome             varchar2(50),"
-                + "cod_marca        int,"
+                + "cod_marca        integer,"
                 + "modelo           varchar2(50),"
                 + "cor              varchar2(50),"
-                + "ano              int,"
+                + "ano              integer,"
                 + "foreign key(cod_marca) references marca(codigo))";
 
         Connection conn = DbConnection.getConnection();
@@ -70,9 +70,10 @@ public class VeiculoDAO implements Dao<Veiculo> {
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, veiculo.getNome());
-            stmt.setString(2, String.valueOf(veiculo.getModelo()));
-            stmt.setString(3, String.valueOf(veiculo.getCor()));
-            stmt.setInt(4, veiculo.getAno());
+            stmt.setInt(2, veiculo.getMarca().getCodigo());
+            stmt.setString(3, String.valueOf(veiculo.getModelo()));
+            stmt.setString(4, String.valueOf(veiculo.getCor()));
+            stmt.setInt(5, veiculo.getAno());
 
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();

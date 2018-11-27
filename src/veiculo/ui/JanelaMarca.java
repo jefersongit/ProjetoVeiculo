@@ -237,8 +237,8 @@ public class JanelaMarca extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Marca marca = getMarca();
 
+        marca = getMarca();
         if (!marca.verificarExistenciaDeMarca(marca)) {
             dao.insert(getMarca());
         } else {
@@ -337,7 +337,10 @@ public class JanelaMarca extends javax.swing.JFrame {
     }
 
     private Marca getMarca() {
-        int codigo = Integer.parseInt(txCodigo.getText());
+        Integer codigo = 99999;
+        if (!txCodigo.equals("")){
+            codigo = Integer.parseInt(txCodigo.toString());
+        }
         String nome = txNome.getText();
         LocalDate anoCriacao = LocalDate.parse(txDataNascimento.getText());
 

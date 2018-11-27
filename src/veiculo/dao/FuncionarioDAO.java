@@ -33,7 +33,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
 
     private void createTable() throws SQLException {
         String sqlCreate = "create table if not exists funcionario("
-                + "codigo           int,"
+                + "codigo           integer,"
                 + "nome             varchar2(50),"
                 + "cpf              long,"
                 + "salario          float,"
