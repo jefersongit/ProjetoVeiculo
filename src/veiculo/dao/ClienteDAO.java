@@ -16,7 +16,7 @@ public class ClienteDAO implements Dao<Cliente> {
 
     private static final String GET_BY_ID = "SELECT * FROM cliente where codigo = ?";
     private static final String GET_ALL = "SELECT * FROM cliente order by codigo asc";
-    private static final String INSERT = "Insert into cliente(codigo,nome,cpf,sexo,naturalidade,endereco,data_nascimento) values(?,?,?,?,?,?,?)";
+    private static final String INSERT = "Insert into cliente(nome,cpf,sexo,naturalidade,endereco,data_nascimento) values(?,?,?,?,?,?)";
     private static final String UPDATE = "update cliente set nome = ?, cpf = ?, sexo = ?, naturalidade = ?, data_nascimento = ? , endereco = ? where codigo = ?";
     private static final String DELETE = "delete from cliente where codigo = ?";
 
@@ -45,7 +45,7 @@ public class ClienteDAO implements Dao<Cliente> {
         Statement stmt = conn.createStatement();
         stmt.execute(sqlCreate);
 
-        DbConnection.close(conn, stmt, null);
+        close(conn, stmt, null);
     }
 
     private Cliente getClienteFromRS(ResultSet rs) throws SQLException {
@@ -108,7 +108,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter cliente pela chave.", e);
         } finally {
-            DbConnection.close(conn, stmt, rs);
+            close(conn, stmt, rs);
         }
         return cliente;
     }
@@ -133,7 +133,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao obter todos os clientes.", e);
         } finally {
-            DbConnection.close(conn, stmt, rs);
+            close(conn, stmt, rs);
         }
 
         return clientes;
@@ -153,7 +153,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao remover cliente.", e);
         } finally {
-            DbConnection.close(conn, stmt, null);
+            close(conn, stmt, null);
         }
     }
 
@@ -179,7 +179,7 @@ public class ClienteDAO implements Dao<Cliente> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar cliente.", e);
         } finally {
-            DbConnection.close(conn, stmt, null);
+            close(conn, stmt, null);
         }
     }
 

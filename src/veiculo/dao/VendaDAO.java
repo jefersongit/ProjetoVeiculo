@@ -15,7 +15,7 @@ public class VendaDAO implements Dao<Venda> {
 
     private static final String GET_BY_ID = "SELECT * FROM venda where codigo = ? ";
     private static final String GET_ALL = "SELECT * FROM venda order by codigo asc";
-    private static final String INSERT = "Insert into venda(codigo, cod_veiculo , cod_funcionario , cod_cliente , preco , quantidade , data_compra) values(?,?,?,?,?,?,?)";
+    private static final String INSERT = "Insert into venda(cod_veiculo , cod_funcionario , cod_cliente , preco , quantidade , data_compra) values(?,?,?,?,?,?)";
     private static final String UPDATE = "update venda set cod_veiculo = ?, cod_funcionario = ?, cod_cliente = ?, preco = ?, quantidade = ?, data_compra = ? where codigo = ?";
     private static final String DELETE = "delete from venda where codigo = ?";
 
@@ -56,14 +56,13 @@ public class VendaDAO implements Dao<Venda> {
         ResultSet rs = null;
         try {
             stmt = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, venda.getCodigo());
-            stmt.setInt(2, venda.getVeiculo().getCodigo());
-            stmt.setInt(3, venda.getFuncionario().getCodigo());
-            stmt.setInt(4, venda.getCliente().getCodigo());
-            stmt.setFloat(5, venda.getPreco());
-            stmt.setInt(6, venda.getQuantidade());
-            stmt.setDate(7, Date.valueOf(venda.getData_compra()));
-            stmt.execute();
+            stmt.setInt(1, venda.getVeiculo().getCodigo());
+            stmt.setInt(2, venda.getFuncionario().getCodigo());
+            stmt.setInt(3, venda.getCliente().getCodigo());
+            stmt.setFloat(4, venda.getPreco());
+            stmt.setInt(5, venda.getQuantidade());
+            stmt.setDate(6, Date.valueOf(venda.getData_compra()));
+            
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
 

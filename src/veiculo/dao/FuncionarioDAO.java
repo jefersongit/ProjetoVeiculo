@@ -18,7 +18,7 @@ public class FuncionarioDAO implements Dao<Funcionario> {
 
     private static final String GET_BY_ID = "SELECT * FROM funcionario where codigo = ? ";
     private static final String GET_ALL = "SELECT * FROM funcionario order by codigo asc";
-    private static final String INSERT = "Insert into funcionario(codigo, nome, cpf, salario, matricula, funcao, data_nascimento) values(?,?,?,?,?,?,?)";
+    private static final String INSERT = "Insert into funcionario(nome, cpf, salario, matricula, funcao, data_nascimento) values(?,?,?,?,?,?)";
     private static final String UPDATE = "update funcionario set nome = ?, cpf = ?, salario = ?, matricula = ?, funcao = ?, data_nascimento = ? where codigo = ?";
     private static final String DELETE = "delete from funcionario where codigo = ?";
 

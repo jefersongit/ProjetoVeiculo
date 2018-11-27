@@ -22,7 +22,7 @@ import veiculo.model.Marca;
 public class MarcaDAO implements Dao<Marca> {
     private static final String GET_BY_ID = "SELECT * FROM marca where codigo = ?";
     private static final String GET_ALL = "SELECT * FROM marca order by codigo asc";
-    private static final String INSERT = "Insert into marca(codigo,nome,ano_criacao) values(?,?,?)";
+    private static final String INSERT = "Insert into marca(nome,ano_criacao) values(?,?)";
     private static final String UPDATE = "update marca set nome = ?, ano_criacao = ? where codigo = ?";
     private static final String DELETE = "delete from marca where codigo = ?";
 

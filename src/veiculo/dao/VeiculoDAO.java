@@ -18,7 +18,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
     private static final String GET_BY_ID = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo where veiculo.codigo = ?";
     private static final String GET_ALL = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo";
-    private static final String INSERT = "Insert into veiculo(codigo,nome,cod_marca,modelo,cor,ano) values(?,?,?,?,?,?)";
+    private static final String INSERT = "Insert into veiculo(nome,cod_marca,modelo,cor,ano) values(?,?,?,?,?)";
     private static final String UPDATE = "update veiculo set codigo = ?, nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
     private static final String DELETE = "delete from veiculo where codigo = ?";
 
