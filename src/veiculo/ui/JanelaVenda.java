@@ -7,10 +7,13 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
+import resources.VeiculoTableModel;
 import veiculo.model.Cliente;
 import veiculo.model.Funcionario;
 import veiculo.model.Venda;
 import resources.VendaTableModel;
+import veiculo.dao.VeiculoDAO;
+import veiculo.model.Veiculo;
 
 public class JanelaVenda extends javax.swing.JFrame {
 
@@ -372,16 +375,15 @@ public class JanelaVenda extends javax.swing.JFrame {
     VendaDAO daoVenda = new VendaDAO();
     ClienteDAO daoCliente = new ClienteDAO();
     FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-//    ProdutoDAO daoProduto = new ProdutoDAO();
-//
-//    private ProdutoTableModel ptm;
-//    private VendaTableModel vtm;
+    VeiculoDAO daoVeiculo = new VeiculoDAO();
+
+    private VeiculoTableModel veiculotm;
+    private VendaTableModel vendatm;
 
     private TableModel carregarTabelaVenda() {
-//        List<Venda> listaVenda = daoVenda.list();
-//        vtm = new VendaTableModel(listaVenda);
-//        return vtm;
-        return null;
+        List<Venda> listaVenda = daoVenda.getAll();
+        vendatm = new VendaTableModel(listaVenda);
+        return vendatm;
     }
 
     private void atualizarTabelaVenda() {
@@ -389,10 +391,10 @@ public class JanelaVenda extends javax.swing.JFrame {
     }
 
     private TableModel carregarTabelaProduto() {
-//        List<Produto> listaProduto = daoProduto.list();
-//        ptm = new ProdutoTableModel(listaProduto);
-//        return ptm;
-        return null;
+        List<Veiculo> listaVeiculo = daoVeiculo.getAll();
+        veiculotm = new VeiculoTableModel(listaVeiculo);
+
+        return veiculotm;
     }
 
     private void atualizarTabelaProduto() {

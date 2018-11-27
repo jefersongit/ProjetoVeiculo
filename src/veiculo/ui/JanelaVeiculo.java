@@ -398,8 +398,8 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     
     private Veiculo getVeiculo() {
         Integer codigo = 99999;
-        if (!txCodigo.equals("")){
-            codigo = Integer.parseInt(txCodigo.toString());
+        if (!txCodigo.getText().equals("")){
+            codigo = Integer.parseInt(txCodigo.getText());
         }
         String nome = txNome.getText();
         int ano = Integer.parseInt(txAno.getText());
