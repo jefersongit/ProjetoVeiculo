@@ -17,9 +17,9 @@ import veiculo.model.Veiculo;
 public class VeiculoDAO implements Dao<Veiculo> {
 
     private static final String GET_BY_ID = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo where veiculo.codigo = ?";
-    private static final String GET_ALL = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo";
+    private static final String GET_ALL = "SELECT * FROM veiculo JOIN marca on veiculo.cod_marca = marca.codigo";
     private static final String INSERT = "Insert into veiculo(nome,cod_marca,modelo,cor,ano) values(?,?,?,?,?)";
-    private static final String UPDATE = "update veiculo set codigo = ?, nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
+    private static final String UPDATE = "update veiculo set nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
     private static final String DELETE = "delete from veiculo where codigo = ?";
 
     public VeiculoDAO() {
@@ -38,6 +38,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
                 + "modelo           varchar2(50),"
                 + "cor              varchar2(50),"
                 + "ano              integer,"
+                + "primary key(codigo),"
                 + "foreign key(cod_marca) references marca(codigo))";
 
         Connection conn = DbConnection.getConnection();
@@ -166,10 +167,11 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
             //setar os parâmetros
             stmt.setString(1, t.getNome());
-            stmt.setString(2, String.valueOf(t.getModelo()));
-            stmt.setString(3, String.valueOf(t.getCor()));
-            stmt.setInt(4, t.getAno());
-            stmt.setInt(5, t.getCodigo());
+            stmt.setInt(2, t.getMarca().getCodigo());
+            stmt.setString(3, String.valueOf(t.getModelo()));
+            stmt.setString(4, String.valueOf(t.getCor()));
+            stmt.setInt(5, t.getAno());
+            stmt.setInt(6, t.getCodigo());
             
             stmt.executeUpdate();
 

@@ -121,6 +121,7 @@ public class JanelaMarca extends javax.swing.JFrame {
 
         jLabel1.setText("Codigo:");
 
+        txCodigo.setEnabled(false);
         txCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txCodigoActionPerformed(evt);
@@ -145,7 +146,7 @@ public class JanelaMarca extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabela);
 
-        jLabel7.setText("Data Nascimento:");
+        jLabel7.setText("Ano criação:");
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -189,7 +190,7 @@ public class JanelaMarca extends javax.swing.JFrame {
                             .addComponent(txDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -337,10 +338,8 @@ public class JanelaMarca extends javax.swing.JFrame {
     }
 
     private Marca getMarca() {
-        Integer codigo = 99999;
-        if (!txCodigo.equals("")){
-            codigo = Integer.parseInt(txCodigo.toString());
-        }
+        int codigo = Integer.parseInt(txCodigo.getText());
+       
         String nome = txNome.getText();
         LocalDate anoCriacao = LocalDate.parse(txDataNascimento.getText());
 

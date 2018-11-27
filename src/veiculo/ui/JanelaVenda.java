@@ -182,7 +182,6 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLabel3.setText("Código:");
 
         txTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txTotal.setEnabled(false);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -190,6 +189,9 @@ public class JanelaVenda extends javax.swing.JFrame {
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel6))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,10 +206,7 @@ public class JanelaVenda extends javax.swing.JFrame {
                                 .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel6)))
+                            .addComponent(txTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -229,7 +228,7 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -399,12 +398,12 @@ public class JanelaVenda extends javax.swing.JFrame {
         ClienteDAO clienteDao = new ClienteDAO();
         FuncionarioDAO funcionarioDao = new FuncionarioDAO();
         Funcionario funcionario = new Funcionario();
-//        Produto produto = new Produto();
+        Veiculo veiculo = new Veiculo();
         Cliente cliente = new Cliente();
 
-//        int cod_produto;
-//        Produto p = ptm.getValueAT(tabelaProduto.getSelectedRow());
-//        cod_produto = p.getCodigo();
+        int cod_veiculo;
+        Veiculo p = veiculotm.getValueAT(tabelaProduto.getSelectedRow());
+        cod_veiculo = p.getCodigo();
 
         List<Cliente> listaCliente = clienteDao.getAll();
         List<Funcionario> listaFuncionario = funcionarioDao.getAll();
@@ -421,16 +420,15 @@ public class JanelaVenda extends javax.swing.JFrame {
             }
         }
 
-        //Cliente cliente = (Cliente) cbCliente.getSelectedItem();
-        //Funcionario funcionario = (Funcionario) cbFuncionario.getSelectedItem();
-        //Produto produto = ad.getValueAT(tabelaProduto.getSelectedRow());
+        //Cliente cb_cliente = (Cliente) cbCliente.getSelectedItem();
+        //Funcionario cb_funcionario = (Funcionario) cbFuncionario.getSelectedItem();
+        //Veiculo tb_veiculo = ad.getValueAT(tabelaProduto.getSelectedRow());
         int codigo = Integer.parseInt(txCodigo.getText());
-//        produto.setCodigo(cod_produto);
-        double total = Double.parseDouble(txTotal.getText());
+        veiculo.setCodigo(cod_veiculo);
+        float total = Float.parseFloat(txTotal.getText());
         LocalDate data_compra = LocalDate.parse(txData.getText());
 
-//        return new Venda(codigo, produto, funcionario, cliente, total, quantidade, data_compra);
-return null;
+        return new Venda(codigo, veiculo, funcionario, cliente, total, data_compra);
     }
 
     private void CarregaCliente() {

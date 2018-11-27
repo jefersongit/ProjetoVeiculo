@@ -14,13 +14,12 @@ public class Venda {
     private int quantidade;
     private LocalDate data_compra;
 
-    public Venda(int codigo, Veiculo veiculo, Funcionario funcionario, Cliente cliente, float preco, int quantidade, LocalDate data_compra) {
+    public Venda(int codigo, Veiculo veiculo, Funcionario funcionario, Cliente cliente, float preco, LocalDate data_compra) {
         this.codigo = codigo;
         this.veiculo = veiculo;
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.preco = preco;
-        this.quantidade = quantidade;
         this.data_compra = data_compra;
     }
 

@@ -256,6 +256,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txCodigo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txCodigoActionPerformed"/>
               </Events>
@@ -299,7 +302,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Nascimento:"/>
+                <Property name="text" type="java.lang.String" value="Ano cria&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
           </SubComponents>
