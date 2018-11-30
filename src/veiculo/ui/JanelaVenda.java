@@ -452,10 +452,13 @@ public class JanelaVenda extends javax.swing.JFrame {
 
     private void limparCampos() {
         cbCliente.removeAll();
+        cbCliente.setSelectedIndex(-1);
         cbFuncionario.removeAll();
+        cbFuncionario.setSelectedIndex(-1);
         txData.setText("");
         txCodigo.setText("");
         txQuantidade.setText("");
+        txTotal.setText("");
     }
 
     private Venda getVenda() {
@@ -500,7 +503,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         List<Cliente> listaCliente = daoCliente.getAll();
 
         for (int i = 0; i < listaCliente.size(); i++) {
-            cbCliente.addItem(listaCliente.get(i).toString());
+            cbCliente.addItem(listaCliente.get(i).getNome());
 
         }
     }
@@ -509,7 +512,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         List<Funcionario> listaFuncionario = daoFuncionario.getAll();
 
         for (int i = 0; i < listaFuncionario.size(); i++) {
-            cbFuncionario.addItem(listaFuncionario.get(i).toString());
+            cbFuncionario.addItem(listaFuncionario.get(i).getNome());
         }
     }
 

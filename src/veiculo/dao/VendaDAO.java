@@ -70,7 +70,7 @@ public class VendaDAO implements Dao<Venda> {
             stmt.setFloat(4, venda.getPreco());
             stmt.setInt(5, venda.getQuantidade());
             stmt.setDate(6, Date.valueOf(venda.getData_compra()));
-            
+
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
 
@@ -185,14 +185,14 @@ public class VendaDAO implements Dao<Venda> {
             stmt = conn.prepareStatement(UPDATE);
 
             //setar os parâmetros
-            stmt.setInt(1, t.getCodigo());
-            stmt.setInt(2, t.getVeiculo().getCodigo());
-            stmt.setInt(3, t.getFuncionario().getCodigo());
-            stmt.setInt(4, t.getCliente().getCodigo());
-            stmt.setFloat(5, t.getPreco());
-            stmt.setInt(6, t.getQuantidade());
-            stmt.setDate(7, Date.valueOf(t.getData_compra()));
-
+            stmt.setInt(1, t.getVeiculo().getCodigo());
+            stmt.setInt(2, t.getFuncionario().getCodigo());
+            stmt.setInt(3, t.getCliente().getCodigo());
+            stmt.setFloat(4, t.getPreco());
+            stmt.setInt(5, t.getQuantidade());
+            stmt.setDate(6, Date.valueOf(t.getData_compra()));
+            stmt.setInt(7, t.getCodigo());
+            
             stmt.executeUpdate();
 
         } catch (SQLException e) {
