@@ -387,6 +387,17 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         txAno.setText(String.valueOf(a.getAno()));
         cbModelo.setSelectedItem(a.getModelo());
         cbCor.setSelectedItem(a.getCor());
+
+        cbMarca.setSelectedItem(a.getMarca().getNome());
+        //cbMarca.setS
+//        for (int i = 0; i < listaMarca.size(); i++) {
+//            if (cbMarca.getSelectedItem().equals(listaMarca.get(i).toString())) {
+//                marca.setCodigo(listaMarca.get(i).getCodigo());
+//            }
+//        }
+        
+        //cbMarca.setSelectedIndex(a.getMarca().getCodigo());
+        txPreco.setText(String.valueOf(a.getPreco()));
     }
 
     private void habilitarComponentes() {
@@ -396,11 +407,11 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         txAno.setEnabled(true);
         txPreco.setEnabled(true);
         cbMarca.setEnabled(true);
+        cbMarca.setSelectedIndex(-1);
         cbModelo.setEnabled(true);
         cbModelo.setSelectedIndex(-1);
         cbCor.setEnabled(true);
         cbCor.setSelectedIndex(-1);
-
         btCancelar.setEnabled(true);
         btSalvar.setEnabled(true);
     }
@@ -459,7 +470,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         List<Marca> listaMarca = mDao.getAll();
 
         for (int i = 0; i < listaMarca.size(); i++) {
-            cbMarca.addItem(listaMarca.get(i).toString());
+            cbMarca.addItem(listaMarca.get(i).getNome());
 
         }
     }

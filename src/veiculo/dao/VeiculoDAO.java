@@ -59,7 +59,10 @@ public class VeiculoDAO implements Dao<Veiculo> {
         veiculo.setCor(Cor.valueOf(rs.getString("cor")));
         veiculo.setAno(rs.getInt("ano"));
         veiculo.setPreco(rs.getDouble("preco"));
-        veiculo.setMarca(new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getDate("ano_criacao").toLocalDate()));
+        
+        MarcaDAO mDao = new MarcaDAO();
+        Marca marca = mDao.getByKey(rs.getInt("cod_marca"));
+        veiculo.setMarca(marca);
 
         return veiculo;
     }
