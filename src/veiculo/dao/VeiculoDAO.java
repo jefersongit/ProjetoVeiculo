@@ -18,8 +18,8 @@ public class VeiculoDAO implements Dao<Veiculo> {
 
     private static final String GET_BY_ID = "SELECT * FROM veiculo JOIN marca on veiculo.codigo = marca.codigo where veiculo.codigo = ?";
     private static final String GET_ALL = "SELECT * FROM veiculo JOIN marca on veiculo.cod_marca = marca.codigo";
-    private static final String INSERT = "Insert into veiculo(nome,cod_marca,modelo,cor,ano) values(?,?,?,?,?)";
-    private static final String UPDATE = "update veiculo set nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ? where codigo = ?";
+    private static final String INSERT = "Insert into veiculo(nome,cod_marca,modelo,cor,ano,preco) values(?,?,?,?,?,?)";
+    private static final String UPDATE = "update veiculo set nome = ?, cod_marca = ?, modelo = ? , cor = ?, ano = ?, preco = ? where codigo = ?";
     private static final String DELETE = "delete from veiculo where codigo = ?";
 
     public VeiculoDAO() {
@@ -38,6 +38,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
                 + "modelo           varchar2(50),"
                 + "cor              varchar2(50),"
                 + "ano              integer,"
+                + "preco            double,"
                 + "primary key(codigo),"
                 + "foreign key(cod_marca) references marca(codigo))";
 
@@ -57,8 +58,9 @@ public class VeiculoDAO implements Dao<Veiculo> {
         veiculo.setModelo(Modelo.valueOf(rs.getString("modelo")));
         veiculo.setCor(Cor.valueOf(rs.getString("cor")));
         veiculo.setAno(rs.getInt("ano"));
-        veiculo.setMarca( new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getDate("ano_criacao").toLocalDate()));
-        
+        veiculo.setPreco(rs.getDouble("preco"));
+        veiculo.setMarca(new Marca(rs.getInt("codigo"), rs.getString("nome"), rs.getDate("ano_criacao").toLocalDate()));
+
         return veiculo;
     }
 
@@ -75,6 +77,7 @@ public class VeiculoDAO implements Dao<Veiculo> {
             stmt.setString(3, String.valueOf(veiculo.getModelo()));
             stmt.setString(4, String.valueOf(veiculo.getCor()));
             stmt.setInt(5, veiculo.getAno());
+            stmt.setDouble(6, veiculo.getPreco());
 
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
@@ -171,8 +174,9 @@ public class VeiculoDAO implements Dao<Veiculo> {
             stmt.setString(3, String.valueOf(t.getModelo()));
             stmt.setString(4, String.valueOf(t.getCor()));
             stmt.setInt(5, t.getAno());
-            stmt.setInt(6, t.getCodigo());
-            
+            stmt.setDouble(6, t.getPreco());
+            stmt.setInt(7, t.getCodigo());
+
             stmt.executeUpdate();
 
         } catch (SQLException e) {

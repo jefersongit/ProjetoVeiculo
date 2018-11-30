@@ -52,6 +52,10 @@ public class Marca {
         this.ano_criacao = ano_criacao;
     }
 
+    public String toString() {
+        return nome;
+    }
+
     public boolean verificarExistenciaDeMarca(Marca a) {
         MarcaDAO dao = new MarcaDAO();
         List<Marca> lista = dao.getAll();

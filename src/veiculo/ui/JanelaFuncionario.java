@@ -156,6 +156,8 @@ public class JanelaFuncionario extends javax.swing.JFrame {
 
         jLabel6.setText("Data Nascimento:");
 
+        txDataNascimento.setToolTipText("aaaa-mm-dd");
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Cadastro de Funcionários");
 

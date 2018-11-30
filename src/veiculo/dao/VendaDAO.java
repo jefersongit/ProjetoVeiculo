@@ -9,13 +9,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import veiculo.dao.DbConnection;
+import veiculo.model.Cliente;
+import veiculo.model.Funcionario;
+import veiculo.model.Marca;
+import veiculo.model.Veiculo;
 import veiculo.model.Venda;
 
 public class VendaDAO implements Dao<Venda> {
 
     private static final String GET_BY_ID = "SELECT * FROM venda where codigo = ? ";
+//            + "JOIN cliente c on v.cod_cliente = c.codigo "
+//            + "JOIN funcionario f on v.cod_funcionario = f.codigo "
+//            + "JOIN veiculo vc on v.cod_veiculo = vc.codigo "
     private static final String GET_ALL = "SELECT * FROM venda order by codigo asc";
-    private static final String INSERT = "Insert into venda(cod_veiculo , cod_funcionario , cod_cliente , preco , quantidade , data_compra) values(?,?,?,?,?,?)";
+    private static final String INSERT = "Insert into venda(cod_veiculo , cod_funcionario , cod_cliente , preco , quantidade, data_compra) values(?,?,?,?,?,?)";
     private static final String UPDATE = "update venda set cod_veiculo = ?, cod_funcionario = ?, cod_cliente = ?, preco = ?, quantidade = ?, data_compra = ? where codigo = ?";
     private static final String DELETE = "delete from venda where codigo = ?";
 
@@ -29,17 +36,18 @@ public class VendaDAO implements Dao<Venda> {
     }
 
     private void createTable() throws SQLException {
-        String sqlCreate = "create table if not exists venda(" 
-            + "codigo int not null primary key," 
-            + "cod_veiculo          integer," 
-            + "cod_funcionario      integer," 
-            + "cod_cliente          integer," 
-            + "preco                float," 
-            + "quantidade           integer," 
-            + "data_compra          date," 
-            + "foreign key (cod_veiculo) references veiculo(codigo)," 
-            + "foreign key (cod_funcionario) references funcionario(codigo)," 
-            + "foreign key (cod_cliente) references cliente(codigo));";
+        String sqlCreate = "create table if not exists venda("
+                + "codigo               integer,"
+                + "cod_veiculo          integer,"
+                + "cod_funcionario      integer,"
+                + "cod_cliente          integer,"
+                + "preco                float,"
+                + "quantidade           integer,"
+                + "data_compra          date,"
+                + "primary key(codigo),"
+                + "foreign key (cod_veiculo) references veiculo(codigo),"
+                + "foreign key (cod_funcionario) references funcionario(codigo),"
+                + "foreign key (cod_cliente) references cliente(codigo));";
 
         Connection conn = DbConnection.getConnection();
 
@@ -76,16 +84,26 @@ public class VendaDAO implements Dao<Venda> {
         }
     }
 
-    private Venda getVendaFromRS(ResultSet res) throws SQLException {
+    private Venda getVendaFromRS(ResultSet rs) throws SQLException {
         Venda venda = new Venda();
 
-        venda.setCodigo(res.getInt("codigo"));
-//        venda.setVeiculo(res.getInt("cod_veiculo"));
-//        venda.setFuncionario(res.getInt("cod_funcionario"));
-//        venda.setCliente(res.getInt("cod_cliente"));
-        venda.setPreco(res.getFloat("preco"));
-        venda.setQuantidade(res.getInt("quantidade"));
-        venda.setData_compra(res.getDate("data_compra").toLocalDate());
+        venda.setCodigo(rs.getInt("codigo"));
+
+        VeiculoDAO vDao = new VeiculoDAO();
+        Veiculo veiculo = vDao.getByKey(rs.getInt("cod_veiculo"));
+        venda.setVeiculo(veiculo);
+
+        FuncionarioDAO fDao = new FuncionarioDAO();
+        Funcionario funcionario = fDao.getByKey(rs.getInt("cod_funcionario"));
+        venda.setFuncionario(funcionario);
+
+        ClienteDAO cDao = new ClienteDAO();
+        Cliente cliente = cDao.getByKey(rs.getInt("cod_cliente"));
+        venda.setCliente(cliente);
+
+        venda.setPreco(rs.getFloat("preco"));
+        venda.setQuantidade(rs.getInt("quantidade"));
+        venda.setData_compra(rs.getDate("data_compra").toLocalDate());
 
         return venda;
     }
@@ -185,4 +203,3 @@ public class VendaDAO implements Dao<Venda> {
         }
     }
 }
-

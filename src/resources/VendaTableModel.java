@@ -88,7 +88,7 @@ public class VendaTableModel extends GenericTableModel<Venda>{
             case 0:
                 return venda.getCodigo();
             case 1:
-                return venda.getVeiculo();
+                return venda.getVeiculo().getNome();
             case 2:
                 return venda.getCliente();
             case 3:

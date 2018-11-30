@@ -11,16 +11,18 @@ public class Veiculo {
     private Modelo modelo;
     private Cor cor;
     private int ano;
+    private double preco;
 
-    public Veiculo(int codigo, String nome, Marca marca, Modelo modelo, Cor cor, int ano) {
+    public Veiculo(int codigo, String nome, Marca marca, Modelo modelo, Cor cor, int ano, double preco) {
         this.codigo = codigo;
         this.nome = nome;
         this.marca = marca;
         this.modelo = modelo;
         this.cor = cor;
         this.ano = ano;
+        this.preco = preco;
     }
-    
+
     public Veiculo() {
     }
 
@@ -80,6 +82,14 @@ public class Veiculo {
 
     public void setDao(VeiculoDAO dao) {
         this.dao = dao;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
     @Override

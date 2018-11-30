@@ -52,14 +52,16 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
         txCodigo = new javax.swing.JTextField();
-        cbFuncionario = new javax.swing.JComboBox<String>();
+        cbFuncionario = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txData = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        cbCliente = new javax.swing.JComboBox<String>();
+        cbCliente = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txTotal = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txQuantidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +125,8 @@ public class JanelaVenda extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaProduto);
 
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -139,12 +143,13 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         tabelaVenda.setModel(carregarTabelaVenda());
         jScrollPane2.setViewportView(tabelaVenda);
+
+        jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -152,8 +157,8 @@ public class JanelaVenda extends javax.swing.JFrame {
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addGap(12, 12, 12))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +167,6 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nova Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -173,6 +177,8 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Total:");
 
+        txData.setToolTipText("aaaa-mm-dd");
+
         jLabel1.setText("Cliente:");
 
         CarregaCliente();
@@ -182,6 +188,28 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLabel3.setText("Código:");
 
         txTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txTotal.setEnabled(false);
+
+        jLabel4.setText("Quantidade:");
+
+        txQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txQuantidadeFocusLost(evt);
+            }
+        });
+
+        jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(cbFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txData, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(cbCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(txQuantidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -206,7 +234,12 @@ public class JanelaVenda extends javax.swing.JFrame {
                                 .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(23, 23, 23)
+                        .addComponent(txQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -228,22 +261,16 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
-        jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(cbFuncionario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txData, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(cbCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(txTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,6 +298,8 @@ public class JanelaVenda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLayeredPane1.getAccessibleContext().setAccessibleName("Veiculo");
+
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -289,25 +318,40 @@ public class JanelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-            Venda venda = getVenda();
+        Venda venda = getVenda();
 
-            if (!venda.verificarExistenciaDeVenda(venda)) {
-                daoVenda.insert(getVenda());
-            } else {
-                daoVenda.update(getVenda());
-            }
+        if (!venda.verificarExistenciaDeVenda(venda)) {
+            daoVenda.insert(getVenda());
+        } else {
+            daoVenda.update(getVenda());
+        }
 
-            JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso");
+        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso");
 
-            atualizarTabelaVeiculo();
-            atualizarTabelaVenda();
-            limparCampos();
-            desabilitarComponentes();       
+        atualizarTabelaVeiculo();
+        atualizarTabelaVenda();
+        limparCampos();
+        desabilitarComponentes();
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void txQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txQuantidadeFocusLost
+        double preco = 0;
+
+        if (tabelaProduto.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null,"Selecione um veiculo para calcular o valor!");
+        } else {
+            Veiculo veiculo = veiculotm.getValueAT(tabelaProduto.getSelectedRow());
+            preco = veiculo.getPreco();
+        }
+        
+        int quantidade = Integer.parseInt(txQuantidade.getText());
+        double valorFinal = preco * quantidade;
+        txTotal.setText(String.valueOf(valorFinal));
+    }//GEN-LAST:event_txQuantidadeFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
@@ -319,6 +363,7 @@ public class JanelaVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -333,6 +378,7 @@ public class JanelaVenda extends javax.swing.JFrame {
     private javax.swing.JTable tabelaVenda;
     private javax.swing.JTextField txCodigo;
     private javax.swing.JTextField txData;
+    private javax.swing.JTextField txQuantidade;
     private javax.swing.JTextField txTotal;
     // End of variables declaration//GEN-END:variables
 
@@ -373,6 +419,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         txData.setEnabled(true);
         btSalvar.setEnabled(true);
         btCancelar.setEnabled(true);
+        txQuantidade.setEnabled(true);
     }
 
     private void desabilitarComponentes() {
@@ -383,6 +430,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         cbFuncionario.setSelectedIndex(-1);
         txCodigo.setEnabled(false);
         txData.setEnabled(false);
+        txQuantidade.setEnabled(false);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
     }
@@ -392,6 +440,7 @@ public class JanelaVenda extends javax.swing.JFrame {
         cbFuncionario.removeAll();
         txData.setText("");
         txCodigo.setText("");
+        txQuantidade.setText("");
     }
 
     private Venda getVenda() {
@@ -420,9 +469,6 @@ public class JanelaVenda extends javax.swing.JFrame {
             }
         }
 
-        //Cliente cb_cliente = (Cliente) cbCliente.getSelectedItem();
-        //Funcionario cb_funcionario = (Funcionario) cbFuncionario.getSelectedItem();
-        //Veiculo tb_veiculo = ad.getValueAT(tabelaProduto.getSelectedRow());
         int codigo = Integer.parseInt(txCodigo.getText());
         veiculo.setCodigo(cod_veiculo);
         float total = Float.parseFloat(txTotal.getText());

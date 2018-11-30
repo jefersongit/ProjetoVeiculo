@@ -21,7 +21,7 @@ import veiculo.model.Marca;
  * @author jeferson_guesser1
  */
 public class JanelaVeiculo extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form CadastroProduto
      */
@@ -59,12 +59,12 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         cbModelo = new javax.swing.JComboBox<>();
-        cbCor = new javax.swing.JComboBox<String>();
+        cbCor = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txPreco = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txCodMarca = new javax.swing.JTextField();
+        cbMarca = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +146,8 @@ public class JanelaVeiculo extends javax.swing.JFrame {
             }
         });
 
+        txAno.setToolTipText("aaaa");
+
         tabela.setModel(carregarTabela());
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,7 +183,14 @@ public class JanelaVeiculo extends javax.swing.JFrame {
 
         jLabel4.setText("Preço:");
 
-        jLabel9.setText("Codigo Marca:");
+        jLabel9.setText("Marca:");
+
+        CarregaMarca();
+        cbMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMarcaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -193,14 +202,6 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txAno, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -217,52 +218,57 @@ public class JanelaVeiculo extends javax.swing.JFrame {
                                         .addGap(68, 68, 68))
                                     .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txCodMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbModelo, 0, 150, Short.MAX_VALUE)
+                            .addComponent(cbCor, 0, 150, Short.MAX_VALUE)
+                            .addComponent(txAno, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbMarca, 0, 150, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cbCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txCodMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -292,16 +298,16 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Veiculo veiculo = getVeiculo(); 
-        
-        if(!veiculo.verificarExistenciaDeVeiculo(veiculo)) {
+        Veiculo veiculo = getVeiculo();
+
+        if (!veiculo.verificarExistenciaDeVeiculo(veiculo)) {
             dao.insert(getVeiculo());
         } else {
             dao.update(getVeiculo());
         }
-        
+
         JOptionPane.showMessageDialog(null, "Veiculo cadastrado com sucesso");
-        
+
         atualizarTabela();
         limparCampos();
         desabilitarComponentes();
@@ -319,12 +325,16 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btDeletarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        if (evt.getClickCount() > 1){
+        if (evt.getClickCount() > 1) {
             Veiculo a = ad.getValueAT(tabela.getSelectedRow());
             recuperarVeiculo(a);
             txCodigo.setEnabled(false);
         }
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void cbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMarcaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
@@ -333,6 +343,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox<String> cbCor;
+    private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -348,29 +359,27 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField txAno;
-    private javax.swing.JTextField txCodMarca;
     private javax.swing.JTextField txCodigo;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txPreco;
     // End of variables declaration//GEN-END:variables
 
-
     VeiculoDAO dao = new VeiculoDAO();
-    
+
+    MarcaDAO mDao = new MarcaDAO();
+
     private TableModel carregarTabela() {
         List<Veiculo> lista = dao.getAll();
         ad = new VeiculoTableModel(lista);
         return ad;
     }
-    
-    private void atualizarTabela(){
+
+    private void atualizarTabela() {
         tabela.setModel(carregarTabela());
     }
-    
-    private Veiculo veiculo;
-    
+
     private VeiculoTableModel ad;
-    
+
     private void recuperarVeiculo(Veiculo a) {
         habilitarComponentes();
         txCodigo.setText(String.valueOf(a.getCodigo()));
@@ -379,56 +388,63 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         cbModelo.setSelectedItem(a.getModelo());
         cbCor.setSelectedItem(a.getCor());
     }
-        
+
     private void habilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(true);
         txNome.setEnabled(true);
         txAno.setEnabled(true);
         txPreco.setEnabled(true);
-        txCodMarca.setEnabled(true);
+        cbMarca.setEnabled(true);
         cbModelo.setEnabled(true);
         cbModelo.setSelectedIndex(-1);
         cbCor.setEnabled(true);
         cbCor.setSelectedIndex(-1);
-        
+
         btCancelar.setEnabled(true);
         btSalvar.setEnabled(true);
-    } 
-    
+    }
+
     private Veiculo getVeiculo() {
         Integer codigo = 99999;
-        if (!txCodigo.getText().equals("")){
+        if (!txCodigo.getText().equals("")) {
             codigo = Integer.parseInt(txCodigo.getText());
         }
         String nome = txNome.getText();
         int ano = Integer.parseInt(txAno.getText());
-        
-        MarcaDAO mDao = new MarcaDAO();
-        Marca marca = mDao.getByKey(Integer.parseInt(txCodMarca.getText()));        
-        
+        Double preco = Double.parseDouble(txPreco.getText());
+        List<Marca> listaMarca = mDao.getAll();
+        Marca marca = new Marca();
+
+        for (int i = 0; i < listaMarca.size(); i++) {
+            if (cbMarca.getSelectedItem().equals(listaMarca.get(i).toString())) {
+                marca.setCodigo(listaMarca.get(i).getCodigo());
+            }
+        }
+
         Cor cor = (Cor) cbCor.getSelectedItem();
         Modelo modelo = (Modelo) cbModelo.getSelectedItem();
-        
-        return new Veiculo(codigo, nome, marca, modelo, cor, ano);
+
+        return new Veiculo(codigo, nome, marca, modelo, cor, ano, preco);
     }
-    
+
     private void desabilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(false);
         txNome.setEnabled(false);
         txAno.setEnabled(false);
         txPreco.setEnabled(false);
-        txCodMarca.setEnabled(false);
+        cbMarca.setEnabled(false);
+        cbMarca.setSelectedIndex(-1);
         cbModelo.setEnabled(false);
         cbModelo.setSelectedIndex(-1);
         cbCor.setEnabled(false);
         cbCor.setSelectedIndex(-1);
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
-       
-      }
-    
+
+    }
+
     private void limparCampos() {
         txCodigo.setText("");
         txNome.setText("");
@@ -436,7 +452,16 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         cbCor.removeAll();
         cbModelo.removeAll();
         txPreco.setText("");
-        txCodMarca.setText("");
+        cbMarca.removeAll();
+    }
+
+    private void CarregaMarca() {
+        List<Marca> listaMarca = mDao.getAll();
+
+        for (int i = 0; i < listaMarca.size(); i++) {
+            cbMarca.addItem(listaMarca.get(i).toString());
+
         }
-    
+    }
+
 }

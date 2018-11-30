@@ -12,7 +12,7 @@ import veiculo.model.Veiculo;
 public class VeiculoTableModel extends GenericTableModel<Veiculo> {
 
     private final String[] colunas = {"Codigo", "Nome", "Modelo",
-        "Cor", "Ano", "Marca"};
+        "Cor", "Ano", "Marca", "Preço"};
 
     private List<Veiculo> list;
 
@@ -101,7 +101,9 @@ public class VeiculoTableModel extends GenericTableModel<Veiculo> {
             case 4:
                 return veiculo.getAno();
             case 5:
-                return veiculo.getMarca();
+                return veiculo.getMarca().getNome();
+            case 6:
+                return veiculo.getPreco();
         }
         return null;
     }
