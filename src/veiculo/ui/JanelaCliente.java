@@ -151,6 +151,8 @@ public class JanelaCliente extends javax.swing.JFrame {
             }
         });
 
+        txCodigo.setEnabled(false);
+
         jLabel2.setText("Nome:");
 
         txDataNascimento.setToolTipText("aaaa-mm-dd");
@@ -394,7 +396,7 @@ public class JanelaCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     ClienteDAO dao = new ClienteDAO();
-                
+
     private Cliente cliente;
 
     private ClienteTableModel ad;
@@ -410,7 +412,6 @@ public class JanelaCliente extends javax.swing.JFrame {
     }
 
     private void recuperaCliente(Cliente a) {
-        //a = dao.getById(a.getCodigo());  
         habilitarComponentes();
         txCodigo.setText(String.valueOf(a.getCodigo()));
         txNome.setText(a.getNome());
@@ -427,7 +428,6 @@ public class JanelaCliente extends javax.swing.JFrame {
 
     private void habilitarComponentes() {
         limparCampos();
-        txCodigo.setEnabled(true);
         txNome.setEnabled(true);
         txEndereco.setEnabled(true);
         cbNaturalidade.setEnabled(true);
@@ -442,7 +442,10 @@ public class JanelaCliente extends javax.swing.JFrame {
     }
 
     private Cliente getCliente() {
-        int codigo = Integer.parseInt(txCodigo.getText());
+        int codigo = 99999;
+        if (!txCodigo.getText().isEmpty()) {
+            codigo = Integer.parseInt(txCodigo.getText());
+        }
         String nome = txNome.getText();
         String endereco = txEndereco.getText();
         Sexo sexo = null;

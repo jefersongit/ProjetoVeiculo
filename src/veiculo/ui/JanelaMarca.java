@@ -332,7 +332,6 @@ public class JanelaMarca extends javax.swing.JFrame {
 
     private void habilitarComponentes() {
         limparCampos();
-        txCodigo.setEnabled(true);
         txNome.setEnabled(true);
         txDataNascimento.setEnabled(true);
         btCancelar.setEnabled(true);
@@ -341,7 +340,10 @@ public class JanelaMarca extends javax.swing.JFrame {
     }
 
     private Marca getMarca() {
-        int codigo = Integer.parseInt(txCodigo.getText());
+        int codigo = 99999;
+        if (!txCodigo.getText().isEmpty()) {
+            codigo = Integer.parseInt(txCodigo.getText());
+        }
 
         String nome = txNome.getText();
         LocalDate anoCriacao = LocalDate.parse(txDataNascimento.getText());

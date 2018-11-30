@@ -9,7 +9,7 @@ import javax.swing.table.TableModel;
 import resources.FuncionarioTableModel;
 
 public class JanelaFuncionario extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Janela_Funcionario
      */
@@ -18,7 +18,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         desabilitarComponentes();
         atualizarTabela();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,6 +119,8 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         jLabel3.setText("CPF:");
+
+        txCodigo.setEnabled(false);
 
         jLabel8.setText("Salario:");
 
@@ -282,15 +284,15 @@ public class JanelaFuncionario extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         Funcionario funcionario = getFuncionario();
-        
-        if(!funcionario.verificarExistenciaDeFuncionario(funcionario)) {
+
+        if (!funcionario.verificarExistenciaDeFuncionario(funcionario)) {
             dao.insert(getFuncionario());
         } else {
             dao.update(getFuncionario());
         }
-        
+
         JOptionPane.showMessageDialog(null, "Funcionario cadastrado/alterado com sucesso");
-        
+
         atualizarTabela();
         limparCampos();
         desabilitarComponentes();
@@ -316,7 +318,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btDeletarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-    if (evt.getClickCount() > 1) {
+        if (evt.getClickCount() > 1) {
 
             Funcionario a = ad.getValueAT(tabela.getSelectedRow());
             recuperarFuncionario(a);
@@ -354,22 +356,21 @@ public class JanelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txSalario;
     // End of variables declaration//GEN-END:variables
- 
+
     FuncionarioDAO dao = new FuncionarioDAO();
-    
-    
+
     private TableModel carregarTabela() {
         List<Funcionario> lista = dao.getAll();
         ad = new FuncionarioTableModel(lista);
         return ad;
     }
-    
-    private void atualizarTabela(){
+
+    private void atualizarTabela() {
         tabela.setModel(carregarTabela());
     }
-        
+
     private FuncionarioTableModel ad;
-         
+
     private void recuperarFuncionario(Funcionario a) {
         habilitarComponentes();
         txCodigo.setText(String.valueOf(a.getCodigo()));
@@ -380,10 +381,9 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         txFuncao.setText(String.valueOf(a.getFuncao()));
         txDataNascimento.setText(String.valueOf(a.getData_nascimento()));
     }
-        
+
     private void habilitarComponentes() {
         limparCampos();
-        txCodigo.setEnabled(true);
         txNome.setEnabled(true);
         txCpf.setEnabled(true);
         txDataNascimento.setEnabled(true);
@@ -392,11 +392,14 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         txFuncao.setEnabled(true);
         btCancelar.setEnabled(true);
         btSalvar.setEnabled(true);
-        
-    } 
-    
+
+    }
+
     private Funcionario getFuncionario() {
-        int codigo = Integer.parseInt(txCodigo.getText());
+        int codigo = 99999;
+        if (!txCodigo.getText().isEmpty()) {
+            codigo = Integer.parseInt(txCodigo.getText());
+        }
         String nome = txNome.getText();
         int cpf = Integer.parseInt(txCpf.getText());
         double salario = Double.parseDouble(txSalario.getText());
@@ -405,7 +408,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         LocalDate dt_nascimento = LocalDate.parse(txDataNascimento.getText());
         return new Funcionario(codigo, nome, cpf, salario, matricula, funcao, dt_nascimento);
     }
-    
+
     private void desabilitarComponentes() {
         limparCampos();
         txCodigo.setEnabled(false);
@@ -418,7 +421,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         btSalvar.setEnabled(false);
         btCancelar.setEnabled(false);
     }
-    
+
     private void limparCampos() {
         txCodigo.setText("");
         txNome.setText("");
@@ -427,7 +430,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
         txSalario.setText("");
         txMatricula.setText("");
         txFuncao.setText("");
-        
-        }
-    
+
+    }
+
 }

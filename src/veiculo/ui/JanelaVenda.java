@@ -172,6 +172,8 @@ public class JanelaVenda extends javax.swing.JFrame {
 
         jLabel2.setText("Funcionário:");
 
+        txCodigo.setEnabled(false);
+
         CarregaFuncionario();
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -342,12 +344,12 @@ public class JanelaVenda extends javax.swing.JFrame {
         double preco = 0;
 
         if (tabelaProduto.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null,"Selecione um veiculo para calcular o valor!");
+            JOptionPane.showMessageDialog(null, "Selecione um veiculo para calcular o valor!");
         } else {
             Veiculo veiculo = veiculotm.getValueAT(tabelaProduto.getSelectedRow());
             preco = veiculo.getPreco();
         }
-        
+
         int quantidade = Integer.parseInt(txQuantidade.getText());
         double valorFinal = preco * quantidade;
         txTotal.setText(String.valueOf(valorFinal));
@@ -415,7 +417,6 @@ public class JanelaVenda extends javax.swing.JFrame {
         limparCampos();
         cbCliente.setEnabled(true);
         cbFuncionario.setEnabled(true);
-        txCodigo.setEnabled(true);
         txData.setEnabled(true);
         btSalvar.setEnabled(true);
         btCancelar.setEnabled(true);
@@ -469,7 +470,10 @@ public class JanelaVenda extends javax.swing.JFrame {
             }
         }
 
-        int codigo = Integer.parseInt(txCodigo.getText());
+        int codigo = 99999;
+        if (!txCodigo.getText().isEmpty()) {
+            codigo = Integer.parseInt(txCodigo.getText());
+        }
         veiculo.setCodigo(cod_veiculo);
         float total = Float.parseFloat(txTotal.getText());
         LocalDate data_compra = LocalDate.parse(txData.getText());

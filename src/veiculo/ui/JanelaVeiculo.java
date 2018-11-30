@@ -140,6 +140,8 @@ public class JanelaVeiculo extends javax.swing.JFrame {
 
         jLabel6.setText("Ano:");
 
+        txCodigo.setEnabled(false);
+
         txNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txNomeActionPerformed(evt);
@@ -387,22 +389,12 @@ public class JanelaVeiculo extends javax.swing.JFrame {
         txAno.setText(String.valueOf(a.getAno()));
         cbModelo.setSelectedItem(a.getModelo());
         cbCor.setSelectedItem(a.getCor());
-
         cbMarca.setSelectedItem(a.getMarca().getNome());
-        //cbMarca.setS
-//        for (int i = 0; i < listaMarca.size(); i++) {
-//            if (cbMarca.getSelectedItem().equals(listaMarca.get(i).toString())) {
-//                marca.setCodigo(listaMarca.get(i).getCodigo());
-//            }
-//        }
-        
-        //cbMarca.setSelectedIndex(a.getMarca().getCodigo());
         txPreco.setText(String.valueOf(a.getPreco()));
     }
 
     private void habilitarComponentes() {
         limparCampos();
-        txCodigo.setEnabled(true);
         txNome.setEnabled(true);
         txAno.setEnabled(true);
         txPreco.setEnabled(true);
@@ -417,8 +409,8 @@ public class JanelaVeiculo extends javax.swing.JFrame {
     }
 
     private Veiculo getVeiculo() {
-        Integer codigo = 99999;
-        if (!txCodigo.getText().equals("")) {
+        int codigo = 99999;
+        if (!txCodigo.getText().isEmpty()) {
             codigo = Integer.parseInt(txCodigo.getText());
         }
         String nome = txNome.getText();
