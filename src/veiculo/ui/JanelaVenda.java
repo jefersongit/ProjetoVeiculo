@@ -147,6 +147,11 @@ public class JanelaVenda extends javax.swing.JFrame {
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         tabelaVenda.setModel(carregarTabelaVenda());
+        tabelaVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaVendaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelaVenda);
 
         jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -355,6 +360,15 @@ public class JanelaVenda extends javax.swing.JFrame {
         txTotal.setText(String.valueOf(valorFinal));
     }//GEN-LAST:event_txQuantidadeFocusLost
 
+    private void tabelaVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaVendaMouseClicked
+        if (evt.getClickCount() > 1) {
+            Venda a = vendatm.getValueAT(tabelaVenda.getSelectedRow());
+            recuperarVenda(a);
+            txCodigo.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_tabelaVendaMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btNovo;
@@ -475,10 +489,11 @@ public class JanelaVenda extends javax.swing.JFrame {
             codigo = Integer.parseInt(txCodigo.getText());
         }
         veiculo.setCodigo(cod_veiculo);
+        int quantidade = Integer.parseInt(txQuantidade.getText());
         float total = Float.parseFloat(txTotal.getText());
         LocalDate data_compra = LocalDate.parse(txData.getText());
 
-        return new Venda(codigo, veiculo, funcionario, cliente, total, data_compra);
+        return new Venda(codigo, veiculo, funcionario, cliente, total, quantidade, data_compra);
     }
 
     private void CarregaCliente() {
@@ -497,4 +512,16 @@ public class JanelaVenda extends javax.swing.JFrame {
             cbFuncionario.addItem(listaFuncionario.get(i).toString());
         }
     }
+
+    private void recuperarVenda(Venda a) {
+        habilitarComponentes();
+        txCodigo.setText(String.valueOf(a.getCodigo()));
+        txQuantidade.setText(String.valueOf(a.getQuantidade()));
+        txTotal.setText(String.valueOf(a.getPreco()));
+        txData.setText(String.valueOf(a.getData_compra()));
+        cbCliente.setSelectedItem(a.getCliente().getNome());
+        cbFuncionario.setSelectedItem(a.getFuncionario().getNome());
+        
+    }
+    
 }
