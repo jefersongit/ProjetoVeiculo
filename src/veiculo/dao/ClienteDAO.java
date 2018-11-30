@@ -56,6 +56,7 @@ public class ClienteDAO implements Dao<Cliente> {
         cliente.setCpf(rs.getLong("cpf"));
         cliente.setEndereco(rs.getString("endereco"));
         cliente.setData_nascimento(rs.getDate("data_nascimento").toLocalDate());
+        cliente.setSexo(Sexo.valueOf(rs.getString("sexo")));
         cliente.setNaturalidade(Naturalidade.valueOf(rs.getString("naturalidade")));
 
         return cliente;
