@@ -289,7 +289,7 @@ public class JanelaFuncionario extends javax.swing.JFrame {
             dao.update(getFuncionario());
         }
         
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Funcionario cadastrado/alterado com sucesso");
         
         atualizarTabela();
         limparCampos();

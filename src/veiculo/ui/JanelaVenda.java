@@ -326,7 +326,7 @@ public class JanelaVenda extends javax.swing.JFrame {
             daoVenda.update(getVenda());
         }
 
-        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso");
+        JOptionPane.showMessageDialog(null, "Venda cadastrado/alterado com sucesso");
 
         atualizarTabelaVeiculo();
         atualizarTabelaVenda();

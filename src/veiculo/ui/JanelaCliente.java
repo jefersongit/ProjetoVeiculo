@@ -319,7 +319,7 @@ public class JanelaCliente extends javax.swing.JFrame {
             dao.update(getCliente());
         }
 
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado/alterado com sucesso");
 
         atualizarTabela();
         limparCampos();

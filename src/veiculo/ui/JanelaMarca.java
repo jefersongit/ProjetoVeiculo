@@ -251,7 +251,7 @@ public class JanelaMarca extends javax.swing.JFrame {
             dao.update(getMarca());
         }
 
-        JOptionPane.showMessageDialog(null, "Marca cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Marca cadastrado/alterado com sucesso");
 
         atualizarTabela();
         limparCampos();

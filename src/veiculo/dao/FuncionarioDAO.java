@@ -168,14 +168,14 @@ public class FuncionarioDAO implements Dao<Funcionario> {
             stmt = conn.prepareStatement(UPDATE);
 
             //setar os parâmetros
-            stmt.setInt(1, t.getCodigo());
-            stmt.setString(2, t.getNome());
-            stmt.setLong(3, t.getCpf());
-            stmt.setDouble(4, t.getSalario());
-            stmt.setLong(5, t.getMatricula());
-            stmt.setString(6, t.getFuncao());
-            stmt.setDate(7, Date.valueOf(t.getData_nascimento()));
-
+            stmt.setString(1, t.getNome());
+            stmt.setLong(2, t.getCpf());
+            stmt.setDouble(3, t.getSalario());
+            stmt.setLong(4, t.getMatricula());
+            stmt.setString(5, t.getFuncao());
+            stmt.setDate(6, Date.valueOf(t.getData_nascimento()));
+            stmt.setInt(7, t.getCodigo());
+            
             stmt.executeUpdate();
 
         } catch (SQLException e) {

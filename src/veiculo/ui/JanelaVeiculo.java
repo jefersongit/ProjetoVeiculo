@@ -306,7 +306,7 @@ public class JanelaVeiculo extends javax.swing.JFrame {
             dao.update(getVeiculo());
         }
 
-        JOptionPane.showMessageDialog(null, "Veiculo cadastrado com sucesso");
+        JOptionPane.showMessageDialog(null, "Veiculo cadastrado/alterado com sucesso");
 
         atualizarTabela();
         limparCampos();
