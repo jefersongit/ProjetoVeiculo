@@ -56,6 +56,21 @@ public class Marca {
         return nome;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Marca other = (Marca) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean verificarExistenciaDeMarca(Marca a) {
         MarcaDAO dao = new MarcaDAO();
         List<Marca> lista = dao.getAll();
